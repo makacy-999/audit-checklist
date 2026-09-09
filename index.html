@@ -414,7 +414,7 @@ function buildMerged(remote, dset){
   return out;
 }
 /* 日志清理线：2026-09-10 01:40（北京时间）前的日志为测试数据，永久过滤，防止旧浏览器本地缓存把旧日志推回 */
-var LOG_CUTOFF = '2026-09-09T17:40:00Z';
+var LOG_CUTOFF = '2026-09-09T18:03:00Z';
 function mergeLogs(remoteLog){
   const seen=new Set(), out=[];
   (remoteLog||[]).concat(cloud.log||[]).forEach(l=>{
