@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>应对审计核对清单 | 审计日程与需提供文件清单</title>
+<style>
+:root{
+  --bg:#F6F8FB; --card:#FFFFFF; --ink:#152033; --sub:#637089; --brand:#2F6BFF;
+  --brand-weak:#EAF1FF; --ok:#16A37B; --ok-weak:#E7F7F1; --line:#E6EAF2;
+  --warn-bg:#FFF7E8; --warn-ink:#92600A; --note-bg:#F0F6FF; --note-ink:#2B4C7E;
+  --danger:#D64545; --radius:10px;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button{font-family:var(--font)}
+a{color:var(--brand)}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:4px}
+
+/* ---------- Header ---------- */
+header.site{background:var(--card);border-bottom:1px solid var(--line)}
+.head-in{max-width:1200px;margin:0 auto;padding:18px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.head-t h1{font-size:20px;margin:0 0 2px;letter-spacing:.2px}
+.head-t p{margin:0;color:var(--sub);font-size:12.5px;max-width:640px}
+.user-box{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--sub);white-space:nowrap}
+.user-box input{width:170px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px;color:var(--ink);background:#FBFCFE}
+.user-box input:focus{border-color:var(--brand);outline:none;background:#fff}
+
+/* ---------- Toolbar ---------- */
+.toolbar{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.tb-in{max-width:1200px;margin:0 auto;padding:10px 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tb-in input[type=search]{flex:1 1 220px;min-width:180px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:#FBFCFE;color:var(--ink)}
+.tb-in select{padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:#FBFCFE;color:var(--ink);max-width:200px}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:8px 12px;font-size:13px;cursor:pointer;transition:background .15s,border-color .15s;white-space:nowrap}
+.btn:hover{background:var(--brand-weak);border-color:var(--brand)}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn.primary:hover{background:#2559dd}
+.btn.danger{color:var(--danger);border-color:#F2C7C7}
+.btn.danger:hover{background:#FDF1F1;border-color:var(--danger)}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--sub)}
+.btn.ghost:hover{background:var(--brand-weak);color:var(--brand)}
+
+/* ---------- Progress ---------- */
+.progress-card{max-width:1200px;margin:16px auto 0;padding:0 20px}
+.pc-in{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+.pc-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:10px}
+.pc-num{font-size:26px;font-weight:700;color:var(--brand);font-variant-numeric:tabular-nums}
+.pc-label{color:var(--sub);font-size:13px}
+.bar{height:10px;background:#E9EEF6;border-radius:99px;overflow:hidden}
+.bar>span{display:block;height:100%;background:var(--brand);border-radius:99px;transition:width .3s ease}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 18px;margin-top:14px}
+.cat-mini{font-size:12.5px;color:var(--sub)}
+.cat-mini .cm-head{display:flex;justify-content:space-between;gap:8px;margin-bottom:4px}
+.cat-mini .cm-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cat-mini .bar{height:6px}
+
+/* ---------- Meta ---------- */
+.meta-line{max-width:1200px;margin:12px auto 0;padding:0 20px;color:var(--sub);font-size:12.5px;display:flex;flex-wrap:wrap;gap:6px 16px}
+
+/* ---------- List ---------- */
+main{max-width:1200px;margin:0 auto;padding:6px 20px 70px}
+section.cat{margin-top:22px}
+section.cat>h2{font-size:16px;margin:0 0 2px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+section.cat>h2 .cnt{font-size:12px;color:var(--sub);font-weight:400}
+.cat-desc{color:var(--sub);font-size:12.5px;margin:0 0 10px}
+.items{display:grid;gap:10px}
+article.item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px}
+article.item.is-done{background:#FAFCFB}
+.item-head{display:flex;align-items:flex-start;gap:10px}
+input[type=checkbox]{width:17px;height:17px;accent-color:var(--brand);cursor:pointer;flex:none;margin-top:3px}
+.item-main{flex:1;min-width:0}
+.item-title{font-weight:600;font-size:14px}
+.is-done .item-title{color:var(--sub);text-decoration:line-through;text-decoration-color:#B9C4D6;text-decoration-thickness:1px}
+.item-en{color:#93A1B7;font-size:11.5px;margin-top:1px;overflow-wrap:anywhere}
+.badge-due{flex:none;background:var(--warn-bg);color:var(--warn-ink);font-size:11.5px;border-radius:99px;padding:2px 9px;white-space:nowrap;margin-top:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;flex:none;justify-content:flex-end}
+.chip{border:1px dashed #C8D3E6;background:#FBFCFE;color:var(--sub);border-radius:99px;padding:2px 10px;font-size:12px;cursor:pointer;max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:border-color .15s,color .15s}
+.chip:hover{border-color:var(--brand);color:var(--brand)}
+.chip.filled{border-style:solid;background:var(--brand-weak);color:var(--note-ink);border-color:#D5E3FF}
+.icon-btn{border:none;background:transparent;cursor:pointer;font-size:14px;padding:3px 5px;border-radius:6px;color:var(--sub);flex:none;margin-top:1px}
+.icon-btn:hover{background:var(--brand-weak)}
+.icon-btn.has-note{color:var(--brand)}
+.chip-input{width:170px;padding:3px 8px;border:1px solid var(--brand);border-radius:99px;font-size:12px;color:var(--ink)}
+/* docs */
+.docs{list-style:none;margin:10px 0 0;padding:0 0 0 27px;display:grid;gap:4px}
+.doc{display:flex;align-items:flex-start;gap:8px;padding:3px 0;border-top:1px dashed #EEF1F7}
+.doc:first-child{border-top:none}
+.doc input[type=checkbox]{width:15px;height:15px;margin-top:3px}
+.doc-text{flex:1;min-width:0;font-size:13px;overflow-wrap:anywhere}
+.doc.is-done .doc-text{color:var(--sub);text-decoration:line-through;text-decoration-color:#B9C4D6}
+.doc-count{margin-left:27px;margin-top:8px;font-size:12px;color:var(--sub)}
+/* notes */
+.note-zone{margin:6px 0 0 27px}
+.note-view{background:var(--note-bg);color:var(--note-ink);font-size:12.5px;border-radius:8px;padding:6px 10px;cursor:pointer;overflow-wrap:anywhere;white-space:pre-wrap}
+.note-view::before{content:"备注：";font-weight:600}
+.note-area{width:100%;min-height:54px;padding:7px 10px;border:1px solid var(--brand);border-radius:8px;font-size:12.5px;font-family:var(--font);color:var(--ink);resize:vertical;background:#fff}
+.empty{margin:40px auto;text-align:center;color:var(--sub)}
+.empty b{display:block;font-size:16px;color:var(--ink);margin-bottom:6px}
+
+/* ---------- Log drawer ---------- */
+#backdrop{position:fixed;inset:0;background:rgba(21,32,51,.32);z-index:60;display:none}
+#backdrop.show{display:block}
+.log-drawer{position:fixed;top:0;right:-420px;width:min(420px,94vw);height:100dvh;background:var(--card);z-index:70;box-shadow:-8px 0 30px rgba(21,32,51,.12);display:flex;flex-direction:column;transition:right .22s ease}
+.log-drawer.show{right:0}
+.log-head{display:flex;align-items:center;gap:8px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.log-head h2{font-size:15px;margin:0;flex:1}
+.log-head .btn{padding:5px 10px;font-size:12px}
+#logList{list-style:none;margin:0;padding:10px 16px 30px;overflow-y:auto;flex:1;display:grid;gap:8px;align-content:start}
+#logList li{border:1px solid var(--line);border-radius:8px;padding:7px 10px;font-size:12.5px;background:#FBFCFE}
+#logList .lt{color:#93A1B7;font-variant-numeric:tabular-nums;margin-right:6px}
+#logList .lu{color:var(--brand);font-weight:600;margin-right:6px}
+#logList .la{color:var(--ink);overflow-wrap:anywhere}
+.log-empty{color:var(--sub);text-align:center;margin-top:40px}
+
+/* ---------- Footer ---------- */
+footer.site{border-top:1px solid var(--line);background:var(--card)}
+.foot-in{max-width:1200px;margin:0 auto;padding:18px 20px;color:var(--sub);font-size:12.5px}
+.foot-in h2{font-size:13px;color:var(--ink);margin:0 0 6px}
+.foot-in ul{margin:0;padding-left:18px;display:grid;gap:3px}
+
+/* collapse */
+body.collapsed .item-en{display:none}
+body.collapsed .docs,body.collapsed .doc-count{display:none}
+
+/* ---------- Print ---------- */
+@media print{
+  body{background:#fff}
+  .toolbar,.user-box,.log-drawer,#backdrop,.icon-btn,.chips,.btn{display:none!important}
+  .note-area{display:none!important}
+  .note-view{display:block!important;border:1px solid #ddd}
+  .item-en,.docs{display:block!important}
+  article.item{break-inside:avoid;box-shadow:none}
+  .bar>span{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+}
+@media (max-width:720px){
+  .item-head{flex-wrap:wrap}
+  .item-main{flex:1 1 100%}
+  .chips{flex:1 1 100%;justify-content:flex-start}
+  .head-in{flex-direction:column;align-items:flex-start}
+  .docs{padding-left:4px}
+  .note-zone{margin-left:4px}
+  .doc-count{margin-left:4px}
+}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="head-in">
+    <div class="head-t">
+      <h1>应对审计核对清单 · Checklist</h1>
+      <p>内容依据：《09:17审计日程和需提供的文件清单.xlsx》整理（第一天审计日程 + 附件-需提供文件清单），描述与顺序保留原文</p>
+      <p>责任部门为按职责推断的建议值，点击即可修改；原文未指定责任人的项目请内部确认后填写。</p>
+    </div>
+    <div class="user-box">
+      <label for="userName">操作人</label>
+      <input id="userName" type="text" placeholder="填写姓名，用于日志署名" autocomplete="off">
+    </div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="tb-in">
+    <input type="search" id="kw" placeholder="🔍 搜索：标题 / 文件 / 责任人 / 备注…" aria-label="关键词搜索">
+    <select id="selCat" aria-label="按大类筛选"><option value="">大类：全部</option></select>
+    <select id="selDept" aria-label="按部门筛选"><option value="">部门：全部</option></select>
+    <select id="selStatus" aria-label="按状态筛选">
+      <option value="">状态：全部</option>
+      <option value="undone">未完成</option>
+      <option value="done">已完成</option>
+    </select>
+    <button class="btn ghost" id="expandBtn">收起明细</button>
+    <button class="btn" id="logBtn">🕘 操作日志</button>
+    <button class="btn primary" id="exportBtn">📥 导出 JSON</button>
+    <button class="btn danger" id="resetBtn">🔄 重置</button>
+  </div>
+</div>
+
+<div class="progress-card">
+  <div class="pc-in">
+    <div class="pc-top">
+      <span class="pc-num" id="pctNum">0%</span>
+      <span class="pc-label" id="pctText">已完成 0 / 0 项核对单元</span>
+    </div>
+    <div class="bar" role="img" aria-label="总体进度条"><span id="pctBar" style="width:0%"></span></div>
+    <div class="cat-grid" id="catGrid"></div>
+  </div>
+</div>
+
+<p class="meta-line"><span id="filterMeta"></span></p>
+
+<main id="list" aria-live="polite"></main>
+
+<div id="backdrop"></div>
+<aside class="log-drawer" id="logDrawer" role="dialog" aria-modal="true" aria-label="操作日志">
+  <div class="log-head">
+    <h2>操作日志</h2>
+    <button class="btn ghost" id="logClear">清空日志</button>
+    <button class="btn" id="logClose">关闭</button>
+  </div>
+  <ol id="logList"></ol>
+</aside>
+
+<footer class="site">
+  <div class="foot-in">
+    <h2>使用说明</h2>
+    <ul>
+      <li>✅ 点击复选框即可勾选/取消，进度实时更新，全部状态<b>自动保存在当前浏览器</b>（localStorage）。</li>
+      <li>📝 点击 📝 按钮可为任意主项或资料子项添加/编辑文字备注；点击已存在的备注条也可继续编辑。</li>
+      <li>✏️ 点击「部门 / 责任人」标签可直接修改，修改结果自动保存。</li>
+      <li>🔍 顶部支持关键词、大类、部门、状态组合筛选；「收起明细」可折叠资料清单与英文对照。</li>
+      <li>📥 导出 JSON 会将勾选、备注、责任人修改与操作日志打包备份；换电脑或清理浏览器缓存前请先导出。</li>
+      <li>🔄 重置将清空所有勾选、备注、责任人修改与日志（保留操作人姓名），不可恢复，请谨慎操作。</li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+const DATA = {"title":"应对审计核对清单","source":"内容依据：《09:17审计日程和需提供的文件清单.xlsx》整理（第一天审计日程 + 附件-需提供文件清单），描述与顺序保留原文","note":"责任部门为按职责推断的建议值，点击即可修改；原文未指定责任人的项目请内部确认后填写。","categories":[{"id":"c1","name":"开场介绍（09:00-09:30）","desc":"","items":[{"id":"i101","title":"相关人员介绍","en":"Introduction of the involved people","docs":[],"owner":"","dept":"","due":""},{"id":"i102","title":"现场管理层开场报告（约30分钟），至少包含以下内容（如适用）","en":"Opening Presentations from Site Management (about 30 min.)","docs":["公司介绍PPT","· 设施布局及面积详情（含土地总面积、建筑/楼栋总数、建筑面积等）","· 产品清单；车辆清单","· 生产描述（含关键点）","· 组织架构图","· 物料流向","· 监管机构检查情况（含审计日期、范围及结果）——近三年无延伸检查","· 总员工人数（按部门，含临时/合同人员）——资料：花名册","· 国内外卫生监管机构颁发的许可证与证书——资料：公司介绍ppt"],"owner":"","dept":"","due":""},{"id":"i103","title":"审计议程确认","en":"Review of Audit Agenda","docs":[],"owner":"","dept":"","due":""},{"id":"i104","title":"上次审计/检查纠正措施（CAPA）计划的进展","en":"Progress on the corrective action plan from previous audit / inspection","docs":["整改附件","泰州审计整改附件","2022年华北区审计整改资料"],"owner":"马宏宇、张雅芳、洪老师","dept":"质量部","due":"9月11日前"}]},{"id":"c2","name":"现场巡视（09:30-12:00）","desc":"现场巡视并沿物料流向开展审计（临时仓储或带拖车的货车），检查内容不限于以下各项","items":[{"id":"i201","title":"现场巡视自查：各区域标识、划分、现场卫生","en":"Site tour and audit following the material flow","docs":[],"owner":"王会伟、阮海贝","dept":"仓储部","due":"9月11日前"},{"id":"i202","title":"· 收货区域","en":"Receiving area","docs":[],"owner":"","dept":"","due":""},{"id":"i203","title":"· 订单处理","en":"Order Processing","docs":[],"owner":"","dept":"","due":""},{"id":"i204","title":"· 库存控制","en":"Inventory Control","docs":[],"owner":"","dept":"","due":""},{"id":"i205","title":"· 存储区域，包括冷库及受控区域（麻醉药品、危险品等）","en":"Storage areas, including cold chambers and secured area (narcotics, hazardous etc.)","docs":[],"owner":"","dept":"","due":""},{"id":"i206","title":"· 订单拣选和发货区域","en":"Order preparation and shipping areas","docs":[],"owner":"","dept":"","due":""},{"id":"i207","title":"· 特定产品的管理与流转：如处于“暂停放行”或“待检隔离”状态的产品、温控产品、受控产品（如麻醉药品）等","en":"Management and flow of specific products","docs":[],"owner":"","dept":"","due":""},{"id":"i208","title":"· 外部仓库（如适用）","en":"External warehouse (if applicable)","docs":[],"owner":"","dept":"","due":""},{"id":"i209","title":"· 场所（临时存储）：安保；虫害控制；清洁、维护；区域内温度管理（阴凉、冷藏、冷冻区域）","en":"Premises (temporary storage)","docs":["①安保制度、门禁记录、监控点位图","②粘鼠板更换记录、灭蝇灯检查记录","③库房清洁记录"],"owner":"王会伟、阮海贝","dept":"仓储部","due":"9月11日前"},{"id":"i210","title":"· 车辆：安保；清洁/卫生/状态；温度控制与监测；通信系统（如GPS）","en":"Vehicle: Security; Cleaning / hygiene / conditions; Temperature control and monitoring; Communication system (e.g. GPS)","docs":["1、①赛诺菲使用所有车辆的完整台账","1、②赛诺菲使用所有车辆的清洁/卫生记录","1、③赛诺菲使用所有车辆的维护保养记录——并确认系统和线下的维保情况是否一致","1、④验证报告","1、⑤准备一辆车（需要有验证报告）和一位司机（可能现场回答问题）","2、检查赛诺菲相关的超温报警是否都已经处理完成","3、自查封签发放、使用记录"],"owner":"1、赵宽宽、成建成、刘科；2、王晓娜；3、高艳琼、张雅芳、洪老师","dept":"运输部","due":"9月11日前"},{"id":"i211","title":"· 蓄冷包/冰排管理","en":"Management of cool pack","docs":["1、冰排出入库记录、预冷记录、泰州业务包装记录","2、广州保温罩预冷记录、出入库记录"],"owner":"1、阮海贝；2、高艳琼","dept":"仓储部","due":"9月11日前"},{"id":"i212","title":"· 温控车辆及其设施和记录","en":"Temperature controlled vehicle and its facilities and records","docs":["①温控车温度分布验证报告——区域提交研发部，经过审核后才可以提交客户查看。未经审核不能提供给客户。","②在途温度记录仪数据","③温度监测设备校准证书"],"owner":"牛晨涛","dept":"设备工程部","due":""},{"id":"i213","title":"· 运输服务追踪系统","en":"Shipment service tracking system","docs":["1、①安智、易流系统说明/演示","1、②各系统权限清单——离职人员的权限是否已经关闭；赛诺菲关键人员的系统权限是否符合角色","2、①异常处理记录","2、②24小时监控岗的系统操作日志中有无共用账号的情况","3、①至少检查2026年1月至现在的所有赛诺菲订单运输节点，使用的供应商是否是备案的供应商（由魏慧提供检查明细）","3、②每个订单在系统中的交付文件清单（随货同行单、温控记录单、签收单等），节点有无逻辑不通的问题","3、③有无使用客户账号上传的问题"],"owner":"1、莫虎；2、王晓娜；3、魏慧、苏兰花、李冰燕","dept":"信息部（IT）","due":"2、9月14日"},{"id":"i214","title":"· 安全、安保、环境监测","en":"Safety, security, environment monitoring","docs":["参考安全审计清单"],"owner":"","dept":"","due":""},{"id":"i215","title":"· 其他","en":"Others","docs":[],"owner":"","dept":"","due":""}]},{"id":"c3","name":"文件审查——质量管理（13:00-16:30）","desc":"","items":[{"id":"i301","title":"· 人员——培训","en":"Personnel – Training","docs":["①年度培训计划","②培训记录（新员工、岗位、年度、专项培训）","③培训考核记录","④各岗位培训矩阵（岗位-技能-人员对应）","⑤人员健康证/体检记录","⑥各区域质量检查供应商月度安全培训记录——培训人员是否齐全"],"owner":"高艳琼、张雅芳、洪老师","dept":"质量部","due":"9月11日前"},{"id":"i302","title":"· 卫生与安全（如易燃物、危险品、细胞毒性药物的处理，木托盘）","en":"Hygiene and Safety","docs":["检查库房内所有木托盘是否都有熏蒸标识——如果没有熏蒸标识需要在库外暂存"],"owner":"阮海贝、王会伟","dept":"仓储部","due":"9月11日前"},{"id":"i303","title":"· 文件管理系统、标准操作规程（SOP）","en":"Document Management System, SOPs","docs":["1、①文件管理SOP","1、②受控文件清单/台账","1、③SOP目录","1、④文件分发/回收记录","1、⑤文件修订历史与审批记录","1、⑥作废文件管理记录","2、库房内的文件必须有发放记录现行有效版本","2、库房内记录必须有打印序列号"],"owner":"1、马宏宇、许壮壮；2、洪老师、张雅芳、高艳琼","dept":"质量部","due":"9月11日前"},{"id":"i304","title":"· 偏差与纠正预防措施（CAPA）","en":"Deviation & Corrective and Preventive Action (CAPA)","docs":["①偏差处理SOP","②偏差台账（含关闭状态）","③偏差调查报告样本（含根因分析）","④CAPA管理SOP","⑤CAPA台账","⑥CAPA有效性评估记录"],"owner":"许壮壮","dept":"质量部","due":"9月11日前"},{"id":"i305","title":"· 变更控制","en":"Change control","docs":["①变更控制SOP","②变更台账","③变更评估与批准记录","④变更实施与验证记录"],"owner":"马宏宇","dept":"质量部","due":"9月11日前"},{"id":"i306","title":"· 运输投诉处理","en":"Transport complaint handling","docs":["①投诉处理SOP","②投诉台账","③投诉调查与处理记录（根因+纠正措施）","④向客户反馈的记录"],"owner":"许壮壮","dept":"质量部","due":"9月11日前"},{"id":"i307","title":"· 审计与自检","en":"Audits & Self-inspection","docs":["①自检SOP","②自检计划（年度）","③自检报告（含上次）","④自检发现项CAPA","⑤内审员资质证明","⑥对供应商/分包商审计计划与报告"],"owner":"马宏宇","dept":"质量部","due":"9月12日前"},{"id":"i308","title":"· 分包商管理","en":"Subcontractors' management","docs":["①分包商清单","②赛诺菲在用供应商的分包协议/质量协议","③分包商资质审计与评估记录","④分包商绩效评估"],"owner":"臧益岐","dept":"供应商管理部","due":"9月13日前"},{"id":"i309","title":"· 客户相关流程：与物料相关的客户特殊要求的确定与评审；客户沟通；客户投诉","en":"Customer related process","docs":["①项目操作手册","②客户投诉台账与处理"],"owner":"","dept":"","due":"9月11日前"}]},{"id":"c4","name":"文件审查——车辆","desc":"","items":[{"id":"i401","title":"· 温控图/温度分布验证与确认","en":"Mapping Validation / Qualification","docs":["参考温控车验证部分"],"owner":"","dept":"","due":""},{"id":"i402","title":"· 维护/更新计划","en":"Maintenance / renewal program","docs":["赛诺菲使用车辆的维护保养记录"],"owner":"","dept":"","due":""},{"id":"i403","title":"· 校准","en":"Calibration","docs":["①校准管理SOP","②年度校准计划（线下台账）","③校准证书（温度记录仪、探头、温湿度计）"],"owner":"牛晨涛","dept":"设备工程部","due":"9月11日前"}]},{"id":"c5","name":"文件审查——运营","desc":"","items":[{"id":"i501","title":"· 运输计划（含控制点）","en":"Transport plan (including control points)","docs":["1、可能需要现场演示调度系统、对应的记录——（1）整车：订单-派车；（2）零担","2、包含控制点的系统验证报告"],"owner":"（1）整车：赵宽宽；（2）零担：李超阳","dept":"运输部","due":"9月11日前"},{"id":"i502","title":"· 装卸货报告","en":"Loading and unloading report","docs":["待确定"],"owner":"","dept":"","due":""},{"id":"i503","title":"· 车辆及文件的追踪与追溯（如信息系统和备份）","en":"Tracking and tracing of vehicles and documentation (e.g. IS and back-up)","docs":["①数据备份记录演示"],"owner":"莫虎","dept":"信息部（IT）","due":"9月11日演示"},{"id":"i504","title":"· 交付文件","en":"Delivery documentation","docs":["参考系统检查节点部分"],"owner":"","dept":"","due":""},{"id":"i505","title":"· 退货流程","en":"Return process","docs":["①退货SOP"],"owner":"苏兰花","dept":"运营部","due":""},{"id":"i506","title":"· 蓄冷包/冰排管理","en":"Management of cool pack","docs":[],"owner":"","dept":"","due":""},{"id":"i507","title":"· 设备（如发电机）及其维护与校准","en":"Equipment (e.g. generator) and their maintenance & calibration","docs":["参考安全审计清单"],"owner":"","dept":"","due":""}]},{"id":"c6","name":"文件审查——计算机化系统","desc":"","items":[{"id":"i601","title":"· GxP计算机化系统清单、系统描述、验证、备份、恢复计划","en":"Inventory list of GxP computerized systems, System Description, validation, back-up, recovery Plan","docs":["1、①各系统权限清单（安智、易流、鼎为（深圳疫苗使用）、多协、国尚信）","1、②验证文件（URS、IQ/OQ/PQ、验证报告）","1、③权限管理记录","1、④审计追踪说明","1、⑤备份策略与备份记录","1、⑥灾难恢复演练","1、⑦多协、鼎为的验证报告","2、检查易流、安智验证报告数据完整性","3、检查国尚信报警是否已经处理"],"owner":"1、莫虎；2、马宏宇；3、王会伟、阮海贝、范键楠","dept":"信息部（IT）","due":"9月11日前"},{"id":"i602","title":"· 业务连续性计划：运营管理","en":"Business continuity plan: Operation management","docs":["收集各区域应急演练报告"],"owner":"许壮壮","dept":"质量部","due":"9月11日前"},{"id":"i603","title":"· 其他","en":"Others","docs":[],"owner":"","dept":"","due":""}]},{"id":"c7","name":"附件——需提供文件清单","desc":"按类别提交的文件清单（中英文对照保留原文）","items":[{"id":"i701","title":"[法规 Regulations] Site Master File——文件清单","en":"Site Master File","docs":[],"owner":"马宏宇","dept":"质量部","due":""},{"id":"i702","title":"[产品与工艺] 近两年内生产的全部批次清单（至少两年；可根据供应商情况考虑更长时间范围）","en":"List of all batches produced in the last two years (at a minimum, more time frame can be considered depending on the supplier)","docs":[],"owner":"","dept":"","due":""},{"id":"i703","title":"[产品与工艺] 近两年内返工和再加工批次清单（至少两年）","en":"List of batches reprocessed and reworked in the last two years (at a minimum)","docs":[],"owner":"","dept":"","due":""},{"id":"i704","title":"[产品与工艺] 工艺流程图——项目操作手册","en":"Process flow diagrams","docs":[],"owner":"","dept":"","due":""},{"id":"i705","title":"[场所/厂房 Premises] 生产区域示意图，包括分区、人流和物流——参照安全","en":"Schematic drawings of production areas, including zoning, personnel and material flows","docs":[],"owner":"阮海贝、王会伟","dept":"仓储部","due":""},{"id":"i706","title":"[变更控制 Change control] 自上次审计以来发生的重大变更清单（设施、生产工艺、清洁工艺、分析方法、计算机化系统等）","en":"List of major changes in activities (facilities, manufacturing process, cleaning process, analytical methods, computerized systems, etc.) since last audit","docs":[],"owner":"","dept":"","due":""},{"id":"i707","title":"[偏差/OOS] 近两年内偏差清单（含微小偏差）（至少两年；可根据供应商情况考虑更长时间范围）","en":"List of deviations (including minor deviations) from the last two years","docs":[],"owner":"","dept":"","due":""},{"id":"i708","title":"[偏差/OOS] 近两年内OOS（超标结果）清单（至少两年；可根据供应商情况考虑更长时间范围）","en":"List of OOS from the last two years","docs":[],"owner":"","dept":"","due":""},{"id":"i709","title":"[投诉/退货/召回] 近两年内投诉清单（至少两年；可根据供应商情况考虑更长时间范围）","en":"List of Complaints from the last two years","docs":[],"owner":"","dept":"","due":""},{"id":"i710","title":"[投诉/退货/召回] 近两年内召回清单（至少两年；可根据供应商情况考虑更长时间范围）","en":"List of recalls for the last two years","docs":[],"owner":"","dept":"","due":""},{"id":"i711","title":"[投诉/退货/召回] 近两年内退货清单（至少两年；可根据供应商情况考虑更长时间范围）","en":"List of returns for the last two years","docs":[],"owner":"","dept":"","due":""}]}]};
+const LS_KEY = 'audit_checklist_v1_202609';
+const DEFAULT_STATE = {user:'',checks:{},notes:{},owners:{},log:[]};
+let state = loadState();
+let filters = {kw:'',cat:'',dept:'',status:''};
+let collapsed = false;
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if(raw){ return Object.assign({}, JSON.parse(JSON.stringify(DEFAULT_STATE)), JSON.parse(raw)); }
+  }catch(e){}
+  return JSON.parse(JSON.stringify(DEFAULT_STATE));
+}
+let saveTimer=null;
+function save(){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>{ try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){} },150);
+}
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function short(s,n){ s=String(s||''); return s.length>n? s.slice(0,n)+'…' : s; }
+function fmtT(iso){ const d=new Date(iso); const p=x=>String(x).padStart(2,'0'); return p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds()); }
+function addLog(action){
+  state.log.unshift({t:new Date().toISOString(), u:state.user||'未署名', a:action});
+  if(state.log.length>500) state.log.length=500;
+  save(); renderLog();
+}
+function allItems(){ const arr=[]; DATA.categories.forEach(c=>c.items.forEach(it=>arr.push({cat:c,it}))); return arr; }
+function itemProgress(it){
+  let t=1+it.docs.length, d=0;
+  if(state.checks[it.id]) d++;
+  it.docs.forEach((_,i)=>{ if(state.checks[it.id+'_'+i]) d++; });
+  return {d,t};
+}
+function totalProgress(){
+  let D=0,T=0;
+  allItems().forEach(({it})=>{ const p=itemProgress(it); D+=p.d; T+=p.t; });
+  return {d:D,t:T};
+}
+function effOwner(it){
+  const def={dept:it.dept||'', owner:it.owner||''};
+  const ov=state.owners[it.id];
+  return ov? Object.assign({},def,ov) : def;
+}
+function matchFilter(it,cat){
+  if(filters.cat && cat.id!==filters.cat) return false;
+  const ow=effOwner(it);
+  if(filters.dept){
+    if(filters.dept==='__none__'){ if(ow.dept) return false; }
+    else if(ow.dept!==filters.dept) return false;
+  }
+  const done=!!state.checks[it.id];
+  if(filters.status==='done' && !done) return false;
+  if(filters.status==='undone' && done) return false;
+  if(filters.kw){
+    const kw=filters.kw.trim().toLowerCase();
+    if(kw){
+      const hay=[it.title,it.en,it.owner,it.dept,it.due,ow.owner,ow.dept,
+        it.docs.join(' '), state.notes[it.id]||'',
+        it.docs.map((_,i)=>state.notes[it.id+'_'+i]||'').join(' ')
+      ].join(' ').toLowerCase();
+      if(!hay.includes(kw)) return false;
+    }
+  }
+  return true;
+}
+
+/* ---------- build filter selects ---------- */
+function buildCatOptions(){
+  const sel=document.getElementById('selCat');
+  const cur=sel.value;
+  sel.innerHTML='<option value="">大类：全部</option>'+
+    DATA.categories.map(c=>'<option value="'+c.id+'">'+esc(c.name)+'</option>').join('');
+  sel.value=cur;
+}
+function buildDeptOptions(){
+  const sel=document.getElementById('selDept');
+  const cur=sel.value;
+  const set=new Set();
+  allItems().forEach(({it})=>{ const d=effOwner(it).dept; if(d) d.split(/[、；;]/).forEach(x=>{const t=x.trim(); if(t) set.add(t);}); });
+  const opts=[...set].sort((a,b)=>a.localeCompare(b,'zh'));
+  sel.innerHTML='<option value="">部门：全部</option><option value="__none__">部门：未指定</option>'+
+    opts.map(d=>'<option value="'+esc(d)+'">'+esc(d)+'</option>').join('');
+  sel.value=opts.includes(cur)?cur:(cur==='__none__'?cur:'');
+}
+
+/* ---------- render ---------- */
+function noteZoneHTML(key){
+  const n=state.notes[key];
+  if(n) return '<div class="note-zone" data-zone="'+key+'"><div class="note-view" data-noteview="'+key+'" title="点击编辑备注">'+esc(n)+'</div></div>';
+  return '<div class="note-zone" data-zone="'+key+'"></div>';
+}
+function renderPreserveScroll(){ const y=window.scrollY; render(); window.scrollTo(0,y); }
+function openNoteEditor(key){
+  const zone=document.querySelector('[data-zone="'+key+'"]');
+  if(!zone) return;
+  const ta=document.createElement('textarea');
+  ta.className='note-area'; ta.value=state.notes[key]||'';
+  ta.placeholder='添加备注…（失焦或按 Esc 保存）';
+  ta.addEventListener('input',()=>{ state.notes[key]=ta.value.trim(); save(); });
+  ta.addEventListener('blur',()=>{
+    const old=state.notes[key]||'';
+    const nv=ta.value.trim();
+    if(nv) state.notes[key]=nv; else delete state.notes[key];
+    save();
+    if(old!==nv){
+      const label=noteLabel(key);
+      addLog((nv?(old?'更新备注':'添加备注'):'删除备注')+'「'+label+'」'+(nv?('：'+short(nv,40)):''));
+      renderPreserveScroll();
+    }
+  });
+  ta.addEventListener('keydown',e=>{ if(e.key==='Escape') ta.blur(); });
+  zone.innerHTML=''; zone.appendChild(ta); ta.focus();
+}
+function noteLabel(key){
+  if(key.includes('_')){
+    const [iid,idx]=key.split(/_(?=[^_]*$)/); const i=parseInt(idx,10);
+    const it=findItem(iid);
+    return short((it?it.title:'')+' / '+(it&&it.docs[i]?it.docs[i]:''),36);
+  }
+  const it=findItem(key); return short(it?it.title:key,36);
+}
+function findItem(id){ for(const c of DATA.categories) for(const it of c.items) if(it.id===id) return it; return null; }
+
+function itemHTML(it){
+  const done=!!state.checks[it.id];
+  const ow=effOwner(it);
+  const p=itemProgress(it);
+  const docs=it.docs.map((d,i)=>{
+    const c=!!state.checks[it.id+'_'+i];
+    const nk=it.id+'_'+i;
+    const hasNote=!!state.notes[nk];
+    return '<li class="doc'+(c?' is-done':'')+'" data-docrow="'+nk+'">'+
+      '<input type="checkbox" data-chk="'+nk+'"'+(c?' checked':'')+' aria-label="子项完成：'+esc(short(d,30))+'">'+
+      '<span class="doc-text">'+esc(d)+'</span>'+
+      '<button class="icon-btn'+(hasNote?' has-note':'')+'" data-notebtn="'+nk+'" title="备注" aria-label="备注">📝</button>'+
+      (hasNote? noteZoneHTML(nk):'')+
+    '</li>';
+  }).join('');
+  const chips=
+    '<button class="chip'+(ow.dept?' filled':'')+'" data-edit="dept" data-item="'+it.id+'" title="点击修改责任部门">'+(ow.dept?('🏢 '+esc(ow.dept)):'+ 部门')+'</button>'+
+    '<button class="chip'+(ow.owner?' filled':'')+'" data-edit="owner" data-item="'+it.id+'" title="点击修改责任人">'+(ow.owner?('👤 '+esc(ow.owner)):'+ 责任人')+'</button>';
+  const hasNote=!!state.notes[it.id];
+  return '<article class="item'+(done?' is-done':'')+'" data-itemcard="'+it.id+'">'+
+    '<div class="item-head">'+
+      '<input type="checkbox" data-chk="'+it.id+'"'+(done?' checked':'')+' aria-label="主项完成：'+esc(short(it.title,30))+'">'+
+      '<div class="item-main"><div class="item-title">'+esc(it.title)+'</div>'+
+      (it.en?'<div class="item-en">'+esc(it.en)+'</div>':'')+'</div>'+
+      (it.due?'<span class="badge-due">⏰ '+esc(it.due)+'</span>':'')+
+      '<div class="chips">'+chips+'</div>'+
+      '<button class="icon-btn'+(hasNote?' has-note':'')+'" data-notebtn="'+it.id+'" title="备注" aria-label="备注">📝</button>'+
+    '</div>'+
+    (hasNote? noteZoneHTML(it.id):'')+
+    (it.docs.length?('<ul class="docs">'+docs+'</ul><div class="doc-count" data-count="'+it.id+'">资料子项 '+subDone(it)+'/'+it.docs.length+' 已核对</div>'):'')+
+  '</article>';
+}
+function subDone(it){ let d=0; it.docs.forEach((_,i)=>{ if(state.checks[it.id+'_'+i]) d++; }); return d; }
+
+function render(){
+  const listEl=document.getElementById('list');
+  let shown=0;
+  const html=DATA.categories.map(c=>{
+    const items=c.items.filter(it=>matchFilter(it,c));
+    if(!items.length) return '';
+    shown+=items.length;
+    const cp=catProgress(c);
+    return '<section class="cat" id="sec-'+c.id+'">'+
+      '<h2>'+esc(c.name)+'<span class="cnt">'+cp.d+'/'+cp.t+' 单元</span></h2>'+
+      (c.desc?'<p class="cat-desc">'+esc(c.desc)+'</p>':'')+
+      '<div class="items">'+items.map(itemHTML).join('')+'</div>'+
+    '</section>';
+  }).join('');
+  listEl.innerHTML= html || '<div class="empty"><b>没有匹配的项目</b>试试调整关键词或筛选条件</div>';
+  updateMeta(shown);
+  updateProgress();
+}
+function catProgress(c){
+  let d=0,t=0;
+  c.items.forEach(it=>{ const p=itemProgress(it); d+=p.d; t+=p.t; });
+  return {d,t};
+}
+function updateMeta(shown){
+  const tp=totalProgress();
+  document.getElementById('filterMeta').innerHTML=
+    '显示 '+shown+' / '+DATA.categories.reduce((s,c)=>s+c.items.length,0)+' 个主项 · 全部进度 '+tp.d+' / '+tp.t+' 核对单元';
+}
+function updateProgress(){
+  const tp=totalProgress();
+  const pct=tp.t? Math.round(tp.d/tp.t*100):0;
+  document.getElementById('pctNum').textContent=pct+'%';
+  document.getElementById('pctText').textContent='已完成 '+tp.d+' / '+tp.t+' 项核对单元';
+  document.getElementById('pctBar').style.width=pct+'%';
+  const grid=document.getElementById('catGrid');
+  grid.innerHTML=DATA.categories.map(c=>{
+    const cp=catProgress(c);
+    const p=cp.t?Math.round(cp.d/cp.t*100):0;
+    return '<div class="cat-mini"><div class="cm-head"><span class="cm-name" title="'+esc(c.name)+'">'+esc(c.name)+'</span><span>'+p+'%</span></div>'+
+      '<div class="bar"><span style="width:'+p+'%"></span></div></div>';
+  }).join('');
+  grid.setAttribute('aria-label','各大类进度');
+}
+
+/* ---------- interactions (delegated) ---------- */
+document.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.matches('input[type=checkbox][data-chk]')){
+    const key=t.getAttribute('data-chk');
+    const on=t.checked;
+    if(on) state.checks[key]=true; else delete state.checks[key];
+    save();
+    const itId=key.includes('_')?key.split(/_(?=[^_]*$)/)[0]:key;
+    const it=findItem(itId);
+    const card=document.querySelector('[data-itemcard="'+itId+'"]');
+    const row=document.querySelector('[data-docrow="'+key+'"]');
+    if(key===itId && card){ card.classList.toggle('is-done',on); }
+    if(key!==itId && row){ row.classList.toggle('is-done',on); }
+    if(it){
+      const cnt=document.querySelector('[data-count="'+itId+'"]');
+      if(cnt) cnt.textContent='资料子项 '+subDone(it)+'/'+it.docs.length+' 已核对';
+    }
+    updateProgress();
+    if(it){
+      if(key===itId) addLog((on?'✔ 完成主项「':'✘ 取消主项「')+short(it.title,36)+'」');
+      else{
+        const idx=parseInt(key.split(/_(?=[^_]*$)/)[1],10);
+        addLog((on?'✔ 勾选子项「':'✘ 取消子项「')+short(it.docs[idx]||'',30)+'」（'+short(it.title,24)+'）');
+      }
+    }
+    // 状态筛选激活时保持列表一致
+    if(filters.status){ setTimeout(renderPreserveScroll,0); }
+  }
+});
+
+document.addEventListener('click',e=>{
+  const nb=e.target.closest('[data-notebtn]');
+  if(nb){
+    const key=nb.getAttribute('data-notebtn');
+    const host=nb.closest('.doc')||nb.closest('.item');
+    openNoteEditor(key,host);
+    return;
+  }
+  const nv=e.target.closest('[data-noteview]');
+  if(nv){
+    const key=nv.getAttribute('data-noteview');
+    openNoteEditor(key, nv.closest('.doc')||nv.closest('.item'));
+    return;
+  }
+  const chip=e.target.closest('.chip[data-edit]');
+  if(chip){ startChipEdit(chip); return; }
+});
+
+function startChipEdit(chip){
+  const field=chip.getAttribute('data-edit');
+  const itId=chip.getAttribute('data-item');
+  const it=findItem(itId);
+  if(!it) return;
+  const cur=effOwner(it)[field]||'';
+  const input=document.createElement('input');
+  input.type='text'; input.className='chip-input'; input.value=cur;
+  input.placeholder=field==='dept'?'责任部门':'责任人（多人用、分隔）';
+  input.setAttribute('aria-label',(field==='dept'?'修改责任部门':'修改责任人')+'：'+short(it.title,20));
+  chip.replaceWith(input);
+  input.focus(); input.select();
+  let cancelled=false;
+  input.addEventListener('keydown',ev=>{
+    if(ev.key==='Enter'){ ev.preventDefault(); input.blur(); }
+    else if(ev.key==='Escape'){ cancelled=true; input.blur(); }
+  });
+  input.addEventListener('blur',()=>{
+    if(cancelled){ render(); return; }
+    const nv=input.value.trim();
+    const old=cur;
+    const ov=Object.assign({}, state.owners[itId]||{}, {});
+    const def=field==='dept'?it.dept||'':it.owner||'';
+    if(nv===def) delete ov[field]; else ov[field]=nv;
+    if(Object.keys(ov).length) state.owners[itId]=ov; else delete state.owners[itId];
+    save();
+    if(old!==nv){
+      const fieldName=field==='dept'?'责任部门':'责任人';
+      addLog('✏️ 修改「'+short(it.title,32)+'」'+fieldName+'：'+(old||'（空）')+' → '+(nv||'（空）'));
+    }
+    buildDeptOptions();
+    render();
+  });
+}
+
+/* toolbar events */
+document.getElementById('kw').addEventListener('input',e=>{
+  filters.kw=e.target.value; clearTimeout(window.__kwT); window.__kwT=setTimeout(render,180);
+});
+document.getElementById('selCat').addEventListener('change',e=>{ filters.cat=e.target.value; render(); });
+document.getElementById('selDept').addEventListener('change',e=>{ filters.dept=e.target.value; render(); });
+document.getElementById('selStatus').addEventListener('change',e=>{ filters.status=e.target.value; render(); });
+document.getElementById('expandBtn').addEventListener('click',e=>{
+  collapsed=!collapsed;
+  document.body.classList.toggle('collapsed',collapsed);
+  e.target.textContent=collapsed?'展开明细':'收起明细';
+});
+
+/* user name */
+const userEl=document.getElementById('userName');
+userEl.value=state.user||'';
+userEl.addEventListener('change',()=>{
+  const old=state.user||'';
+  state.user=userEl.value.trim(); save();
+  if(old!==state.user) addLog('设置操作人为「'+(state.user||'未署名')+'」');
+});
+
+/* log drawer */
+const drawer=document.getElementById('logDrawer'), backdrop=document.getElementById('backdrop');
+function openLog(){ drawer.classList.add('show'); backdrop.classList.add('show'); renderLog(); }
+function closeLog(){ drawer.classList.remove('show'); backdrop.classList.remove('show'); }
+document.getElementById('logBtn').addEventListener('click',openLog);
+document.getElementById('logClose').addEventListener('click',closeLog);
+backdrop.addEventListener('click',closeLog);
+document.getElementById('logClear').addEventListener('click',()=>{
+  if(confirm('确定清空全部操作日志？')){ state.log=[]; save(); renderLog(); }
+});
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLog(); });
+function renderLog(){
+  const ol=document.getElementById('logList');
+  if(!state.log.length){ ol.innerHTML='<div class="log-empty">暂无操作记录</div>'; return; }
+  ol.innerHTML=state.log.map(l=>'<li><span class="lt">'+fmtT(l.t)+'</span><span class="lu">'+esc(l.u)+'</span><span class="la">'+esc(l.a)+'</span></li>').join('');
+}
+
+/* export */
+document.getElementById('exportBtn').addEventListener('click',()=>{
+  const tp=totalProgress();
+  const payload={
+    app:'audit-preparation-checklist', version:1,
+    exportedAt:new Date().toISOString(),
+    user:state.user||'未署名',
+    progress:{done:tp.d, total:tp.t, pct: tp.t?Math.round(tp.d/tp.t*100):0},
+    state:state
+  };
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  const d=new Date(); const p=x=>String(x).padStart(2,'0');
+  a.href=URL.createObjectURL(blob);
+  a.download='audit-checklist-progress-'+d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'-'+p(d.getHours())+p(d.getMinutes())+'.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  addLog('📥 导出进度数据（JSON）：完成 '+tp.d+'/'+tp.t);
+});
+
+/* reset */
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  if(confirm('确定重置？\n\n将清空所有勾选状态、备注、责任人修改与操作日志（保留操作人姓名），且不可恢复。建议先「导出 JSON」备份。')){
+    const u=state.user;
+    state={user:u,checks:{},notes:{},owners:{},log:[]};
+    try{ localStorage.removeItem(LS_KEY); }catch(e){}
+    save(); buildDeptOptions(); render(); renderLog();
+  }
+});
+
+/* init */
+buildCatOptions();
+buildDeptOptions();
+render();
+renderLog();
+</script>
+</body>
+</html>
