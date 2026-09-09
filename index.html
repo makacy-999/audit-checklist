@@ -37,6 +37,8 @@ header.site{background:linear-gradient(150deg,var(--navy) 0%,var(--navy-2) 100%)
 .user-box label{letter-spacing:1px}
 .user-box input{width:176px;padding:8px 12px;border:1px solid rgba(255,255,255,.28);border-radius:8px;font-size:13px;color:var(--ink);background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.18)}
 .user-box input:focus{border-color:var(--gold);outline:none}
+.head-right{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.corp-logo{display:block;width:169px;height:50px;padding:0;background:#fff;border-radius:8px;box-shadow:0 1px 6px rgba(0,0,0,.28);background-image:url(https://makacy-999.github.io/audit-checklist/corp_logo.png);background-repeat:no-repeat;background-position:center;background-size:calc(100% - 20px) auto}
 
 /* ---------- Sync strip / lock strip ---------- */
 .sync-strip{max-width:calc(100% - 40px);width:fit-content;margin:14px auto 0;padding:6px 16px;display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--sub);flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:99px;box-shadow:var(--shadow-sm)}
@@ -155,6 +157,8 @@ footer.site{border-top:1px solid var(--line);background:#F8FAFC}
 .foot-in{max-width:1200px;margin:0 auto;padding:20px;color:var(--sub);font-size:12.5px}
 .foot-in h2{font-size:13px;color:var(--navy);margin:0 0 8px;letter-spacing:.5px}
 .foot-in ul{margin:0;padding-left:18px;display:grid;gap:4px;line-height:1.75}
+.it-warn{background:#FDEDED;color:#B91C1C;border-top:1px solid #F5C9C9;padding:10px 20px;text-align:center;font-size:13px;font-weight:600;letter-spacing:.4px}
+.it-warn b{font-weight:800}
 
 /* collapse */
 body.collapsed .item-en{display:none}
@@ -199,9 +203,12 @@ body.collapsed .docs,body.collapsed .doc-count{display:none}
       <p>内容依据：《09:17审计日程和需提供的文件清单.xlsx》整理（第一天审计日程 + 附件-需提供文件清单），描述与顺序保留原文</p>
       <p>协同规则：所有人共用同一份数据，操作自动署名并实时同步；<b>未写责任人的条目</b>由质量部<b>马宏宇、韩雪</b>统一填写（含部门与责任人）和修改；<b>已写明责任人的条目</b>，仅该责任人可修改与打勾，不能修改其他人的条目；管理员<b>马宏宇</b>可修改全部内容；任何人都不能删除他人填写的内容。</p>
     </div>
-    <div class="user-box">
-      <label for="userName">操作人</label>
-      <input id="userName" type="text" placeholder="输入姓名后开始核对" autocomplete="off">
+    <div class="head-right">
+      <div class="corp-logo" role="img" aria-label="华人供应链管理 Sino S.C.M."></div>
+      <div class="user-box">
+        <label for="userName">操作人</label>
+        <input id="userName" type="text" placeholder="输入姓名后开始核对" autocomplete="off">
+      </div>
     </div>
   </div>
 </header>
@@ -268,6 +275,7 @@ body.collapsed .docs,body.collapsed .doc-count{display:none}
       <li>⚠️ 每次修改都会以提交记录形式保存在共享库中（可追溯历史）；如需找回被覆盖的内容可联系管理员从历史版本恢复。</li>
     </ul>
   </div>
+  <div class="it-warn"><b>IT部门提醒：</b>仅限北京盛世华人内部使用，严禁将地址转给公司外部人员！</div>
 </footer>
 
 <div id="toast" role="status" aria-live="polite"></div>
