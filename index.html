@@ -178,7 +178,7 @@ body.collapsed .docs,body.collapsed .doc-count{display:none}
     <div class="head-t">
       <h1>应对审计核对清单 · Checklist<span class="ver">多人协同版</span></h1>
       <p>内容依据：《09:17审计日程和需提供的文件清单.xlsx》整理（第一天审计日程 + 附件-需提供文件清单），描述与顺序保留原文</p>
-      <p>协同规则：所有人共用同一份数据，操作自动署名并实时同步；<b>完成状态人人可勾</b>、<b>备注人人可填</b>；已填写内容的修改权归填写者本人、该条目责任人和管理员（马宏宇）；任何人都不能删除他人填写的内容。</p>
+      <p>协同规则：所有人共用同一份数据，操作自动署名并实时同步；<b>未写责任人的条目</b>由质量部<b>马宏宇、韩雪</b>统一填写（含部门与责任人）和修改；<b>已写明责任人的条目</b>，仅该责任人可修改与打勾，不能修改其他人的条目；管理员<b>马宏宇</b>可修改全部内容；任何人都不能删除他人填写的内容。</p>
     </div>
     <div class="user-box">
       <label for="userName">操作人</label>
@@ -192,7 +192,7 @@ body.collapsed .docs,body.collapsed .doc-count{display:none}
   <span id="syncText">正在初始化…</span>
   <button class="btn ghost" id="refreshBtn" type="button">🔄 立即刷新</button>
 </div>
-<div class="lock-strip" id="lockStrip" hidden><span>请先在右上角「操作人」输入你的姓名，再开始勾选或填写。数据为全组共享：你填写的内容会自动保存并同步给所有同事；完成状态人人可勾、备注人人可填；已填写内容仅填写者、该条目责任人和管理员马宏宇可再修改，任何人都不能删除他人填写的内容。</span></div>
+<div class="lock-strip" id="lockStrip" hidden><span>请先在右上角「操作人」输入你的姓名，再开始勾选或填写。数据为全组共享，你填写的内容会自动保存并同步给所有同事；未写责任人的条目由质量部马宏宇、韩雪统一填写和修改；已写明责任人的条目仅该责任人可修改与打勾；管理员马宏宇可修改全部内容，任何人都不能删除他人填写的内容。</span></div>
 
 <div class="toolbar">
   <div class="tb-in">
@@ -241,9 +241,9 @@ body.collapsed .docs,body.collapsed .doc-count{display:none}
     <ul>
       <li>👤 首次使用：在右上角输入<b>你的姓名</b>（浏览器会记住），之后所有操作自动署名。</li>
       <li>☁️ 数据<b>保存在云端共享库</b>：A 同事填写后，B 同事打开同一页面即可看到；页面每 30 秒自动刷新，也可点「立即刷新」。</li>
-      <li>🔒 权限规则：<b>完成状态人人可勾、备注人人可填</b>；已填写的备注/责任人由<b>填写者本人、该条目责任人</b>再修改；<b>任何人不能删除他人填写的内容</b>；管理员<b>马宏宇</b>可修改全部内容。</li>
+      <li>🔒 权限规则：<b>未写责任人的条目</b>由质量部<b>马宏宇、韩雪</b>统一填写（含部门/责任人）和修改；<b>已写明责任人的条目</b>仅该责任人可修改与打勾，不能修改其他人的；<b>任何人不能删除他人填写的内容</b>；管理员<b>马宏宇</b>可修改全部内容。</li>
       <li>✅ 点击复选框勾选/取消，📊 进度条实时统计全员完成情况；📝 点击 📝 按钮或备注条添加/编辑自己的备注。</li>
-      <li>✏️ 点击「部门 / 责任人」标签修改：没写责任人名字的条目人人可填；写了自己名字的条目，你也能编辑它的备注；所有修改自动留痕。</li>
+      <li>✏️ 点击「部门 / 责任人」标签：未写责任人的条目由马宏宇、韩雪填写部门与责任人；已分配条目的归属调整由管理员马宏宇操作；所有修改自动留痕。</li>
       <li>🕘 操作日志记录全员的每次操作（谁、什么时间、做了什么），日志自动保留最近 500 条，不可手动清空。</li>
       <li>📥 导出 JSON 会打包当前全员共享数据用于备份；🧹「清除我的记录」只清除你本人填写的内容，不影响他人。</li>
       <li>⚠️ 每次修改都会以提交记录形式保存在共享库中（可追溯历史）；如需找回被覆盖的内容可联系管理员从历史版本恢复。</li>
@@ -258,7 +258,7 @@ body.collapsed .docs,body.collapsed .doc-count{display:none}
 const DATA = {"title": "应对审计核对清单", "source": "内容依据：《09:17审计日程和需提供的文件清单.xlsx》整理（第一天审计日程 + 附件-需提供文件清单），描述与顺序保留原文", "note": "责任部门为按职责推断的建议值，点击即可修改；原文未指定责任人的项目请内部确认后填写。", "categories": [{"id": "c1", "name": "开场介绍（09:00-09:30）", "desc": "", "items": [{"id": "i101", "title": "相关人员介绍", "en": "Introduction of the involved people", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i102", "title": "现场管理层开场报告（约30分钟），至少包含以下内容（如适用）", "en": "Opening Presentations from Site Management (about 30 min.)", "docs": ["公司介绍PPT", "· 设施布局及面积详情（含土地总面积、建筑/楼栋总数、建筑面积等）", "· 产品清单；车辆清单", "· 生产描述（含关键点）", "· 组织架构图", "· 物料流向", "· 监管机构检查情况（含审计日期、范围及结果）——近三年无延伸检查", "· 总员工人数（按部门，含临时/合同人员）——资料：花名册", "· 国内外卫生监管机构颁发的许可证与证书——资料：公司介绍ppt"], "owner": "", "dept": "", "due": ""}, {"id": "i103", "title": "审计议程确认", "en": "Review of Audit Agenda", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i104", "title": "上次审计/检查纠正措施（CAPA）计划的进展", "en": "Progress on the corrective action plan from previous audit / inspection", "docs": ["整改附件", "泰州审计整改附件", "2022年华北区审计整改资料"], "owner": "马宏宇、张雅芳、洪老师", "dept": "质量部", "due": "9月11日前"}]}, {"id": "c2", "name": "现场巡视（09:30-12:00）", "desc": "现场巡视并沿物料流向开展审计（临时仓储或带拖车的货车），检查内容不限于以下各项", "items": [{"id": "i201", "title": "现场巡视自查：各区域标识、划分、现场卫生", "en": "Site tour and audit following the material flow", "docs": [], "owner": "王会伟、阮海贝", "dept": "仓储部", "due": "9月11日前"}, {"id": "i202", "title": "· 收货区域", "en": "Receiving area", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i203", "title": "· 订单处理", "en": "Order Processing", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i204", "title": "· 库存控制", "en": "Inventory Control", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i205", "title": "· 存储区域，包括冷库及受控区域（麻醉药品、危险品等）", "en": "Storage areas, including cold chambers and secured area (narcotics, hazardous etc.)", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i206", "title": "· 订单拣选和发货区域", "en": "Order preparation and shipping areas", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i207", "title": "· 特定产品的管理与流转：如处于“暂停放行”或“待检隔离”状态的产品、温控产品、受控产品（如麻醉药品）等", "en": "Management and flow of specific products", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i208", "title": "· 外部仓库（如适用）", "en": "External warehouse (if applicable)", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i209", "title": "· 场所（临时存储）：安保；虫害控制；清洁、维护；区域内温度管理（阴凉、冷藏、冷冻区域）", "en": "Premises (temporary storage)", "docs": ["①安保制度、门禁记录、监控点位图", "②粘鼠板更换记录、灭蝇灯检查记录", "③库房清洁记录"], "owner": "王会伟、阮海贝", "dept": "仓储部", "due": "9月11日前"}, {"id": "i210", "title": "· 车辆：安保；清洁/卫生/状态；温度控制与监测；通信系统（如GPS）", "en": "Vehicle: Security; Cleaning / hygiene / conditions; Temperature control and monitoring; Communication system (e.g. GPS)", "docs": ["1、①赛诺菲使用所有车辆的完整台账", "1、②赛诺菲使用所有车辆的清洁/卫生记录", "1、③赛诺菲使用所有车辆的维护保养记录——并确认系统和线下的维保情况是否一致", "1、④验证报告", "1、⑤准备一辆车（需要有验证报告）和一位司机（可能现场回答问题）", "2、检查赛诺菲相关的超温报警是否都已经处理完成", "3、自查封签发放、使用记录"], "owner": "1、赵宽宽、成建成、刘科；2、王晓娜；3、高艳琼、张雅芳、洪老师", "dept": "运输部", "due": "9月11日前"}, {"id": "i211", "title": "· 蓄冷包/冰排管理", "en": "Management of cool pack", "docs": ["1、冰排出入库记录、预冷记录、泰州业务包装记录", "2、广州保温罩预冷记录、出入库记录"], "owner": "1、阮海贝；2、高艳琼", "dept": "仓储部", "due": "9月11日前"}, {"id": "i212", "title": "· 温控车辆及其设施和记录", "en": "Temperature controlled vehicle and its facilities and records", "docs": ["①温控车温度分布验证报告——区域提交研发部，经过审核后才可以提交客户查看。未经审核不能提供给客户。", "②在途温度记录仪数据", "③温度监测设备校准证书"], "owner": "牛晨涛", "dept": "设备工程部", "due": ""}, {"id": "i213", "title": "· 运输服务追踪系统", "en": "Shipment service tracking system", "docs": ["1、①安智、易流系统说明/演示", "1、②各系统权限清单——离职人员的权限是否已经关闭；赛诺菲关键人员的系统权限是否符合角色", "2、①异常处理记录", "2、②24小时监控岗的系统操作日志中有无共用账号的情况", "3、①至少检查2026年1月至现在的所有赛诺菲订单运输节点，使用的供应商是否是备案的供应商（由魏慧提供检查明细）", "3、②每个订单在系统中的交付文件清单（随货同行单、温控记录单、签收单等），节点有无逻辑不通的问题", "3、③有无使用客户账号上传的问题"], "owner": "1、莫虎；2、王晓娜；3、魏慧、苏兰花、李冰燕", "dept": "信息部（IT）", "due": "2、9月14日"}, {"id": "i214", "title": "· 安全、安保、环境监测", "en": "Safety, security, environment monitoring", "docs": ["参考安全审计清单"], "owner": "", "dept": "", "due": ""}, {"id": "i215", "title": "· 其他", "en": "Others", "docs": [], "owner": "", "dept": "", "due": ""}]}, {"id": "c3", "name": "文件审查——质量管理（13:00-16:30）", "desc": "", "items": [{"id": "i301", "title": "· 人员——培训", "en": "Personnel – Training", "docs": ["①年度培训计划", "②培训记录（新员工、岗位、年度、专项培训）", "③培训考核记录", "④各岗位培训矩阵（岗位-技能-人员对应）", "⑤人员健康证/体检记录", "⑥各区域质量检查供应商月度安全培训记录——培训人员是否齐全"], "owner": "高艳琼、张雅芳、洪老师", "dept": "质量部", "due": "9月11日前"}, {"id": "i302", "title": "· 卫生与安全（如易燃物、危险品、细胞毒性药物的处理，木托盘）", "en": "Hygiene and Safety", "docs": ["检查库房内所有木托盘是否都有熏蒸标识——如果没有熏蒸标识需要在库外暂存"], "owner": "阮海贝、王会伟", "dept": "仓储部", "due": "9月11日前"}, {"id": "i303", "title": "· 文件管理系统、标准操作规程（SOP）", "en": "Document Management System, SOPs", "docs": ["1、①文件管理SOP", "1、②受控文件清单/台账", "1、③SOP目录", "1、④文件分发/回收记录", "1、⑤文件修订历史与审批记录", "1、⑥作废文件管理记录", "2、库房内的文件必须有发放记录现行有效版本", "2、库房内记录必须有打印序列号"], "owner": "1、马宏宇、许壮壮；2、洪老师、张雅芳、高艳琼", "dept": "质量部", "due": "9月11日前"}, {"id": "i304", "title": "· 偏差与纠正预防措施（CAPA）", "en": "Deviation & Corrective and Preventive Action (CAPA)", "docs": ["①偏差处理SOP", "②偏差台账（含关闭状态）", "③偏差调查报告样本（含根因分析）", "④CAPA管理SOP", "⑤CAPA台账", "⑥CAPA有效性评估记录"], "owner": "许壮壮", "dept": "质量部", "due": "9月11日前"}, {"id": "i305", "title": "· 变更控制", "en": "Change control", "docs": ["①变更控制SOP", "②变更台账", "③变更评估与批准记录", "④变更实施与验证记录"], "owner": "马宏宇", "dept": "质量部", "due": "9月11日前"}, {"id": "i306", "title": "· 运输投诉处理", "en": "Transport complaint handling", "docs": ["①投诉处理SOP", "②投诉台账", "③投诉调查与处理记录（根因+纠正措施）", "④向客户反馈的记录"], "owner": "许壮壮", "dept": "质量部", "due": "9月11日前"}, {"id": "i307", "title": "· 审计与自检", "en": "Audits & Self-inspection", "docs": ["①自检SOP", "②自检计划（年度）", "③自检报告（含上次）", "④自检发现项CAPA", "⑤内审员资质证明", "⑥对供应商/分包商审计计划与报告"], "owner": "马宏宇", "dept": "质量部", "due": "9月12日前"}, {"id": "i308", "title": "· 分包商管理", "en": "Subcontractors' management", "docs": ["①分包商清单", "②赛诺菲在用供应商的分包协议/质量协议", "③分包商资质审计与评估记录", "④分包商绩效评估"], "owner": "臧益岐", "dept": "供应商管理部", "due": "9月13日前"}, {"id": "i309", "title": "· 客户相关流程：与物料相关的客户特殊要求的确定与评审；客户沟通；客户投诉", "en": "Customer related process", "docs": ["①项目操作手册", "②客户投诉台账与处理"], "owner": "", "dept": "", "due": "9月11日前"}]}, {"id": "c4", "name": "文件审查——车辆", "desc": "", "items": [{"id": "i401", "title": "· 温控图/温度分布验证与确认", "en": "Mapping Validation / Qualification", "docs": ["参考温控车验证部分"], "owner": "", "dept": "", "due": ""}, {"id": "i402", "title": "· 维护/更新计划", "en": "Maintenance / renewal program", "docs": ["赛诺菲使用车辆的维护保养记录"], "owner": "", "dept": "", "due": ""}, {"id": "i403", "title": "· 校准", "en": "Calibration", "docs": ["①校准管理SOP", "②年度校准计划（线下台账）", "③校准证书（温度记录仪、探头、温湿度计）"], "owner": "牛晨涛", "dept": "设备工程部", "due": "9月11日前"}]}, {"id": "c5", "name": "文件审查——运营", "desc": "", "items": [{"id": "i501", "title": "· 运输计划（含控制点）", "en": "Transport plan (including control points)", "docs": ["1、可能需要现场演示调度系统、对应的记录——（1）整车：订单-派车；（2）零担", "2、包含控制点的系统验证报告"], "owner": "（1）整车：赵宽宽；（2）零担：李超阳", "dept": "运输部", "due": "9月11日前"}, {"id": "i502", "title": "· 装卸货报告", "en": "Loading and unloading report", "docs": ["待确定"], "owner": "", "dept": "", "due": ""}, {"id": "i503", "title": "· 车辆及文件的追踪与追溯（如信息系统和备份）", "en": "Tracking and tracing of vehicles and documentation (e.g. IS and back-up)", "docs": ["①数据备份记录演示"], "owner": "莫虎", "dept": "信息部（IT）", "due": "9月11日演示"}, {"id": "i504", "title": "· 交付文件", "en": "Delivery documentation", "docs": ["参考系统检查节点部分"], "owner": "", "dept": "", "due": ""}, {"id": "i505", "title": "· 退货流程", "en": "Return process", "docs": ["①退货SOP"], "owner": "苏兰花", "dept": "运营部", "due": ""}, {"id": "i506", "title": "· 蓄冷包/冰排管理", "en": "Management of cool pack", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i507", "title": "· 设备（如发电机）及其维护与校准", "en": "Equipment (e.g. generator) and their maintenance & calibration", "docs": ["参考安全审计清单"], "owner": "", "dept": "", "due": ""}]}, {"id": "c6", "name": "文件审查——计算机化系统", "desc": "", "items": [{"id": "i601", "title": "· GxP计算机化系统清单、系统描述、验证、备份、恢复计划", "en": "Inventory list of GxP computerized systems, System Description, validation, back-up, recovery Plan", "docs": ["1、①各系统权限清单（安智、易流、鼎为（深圳疫苗使用）、多协、国尚信）", "1、②验证文件（URS、IQ/OQ/PQ、验证报告）", "1、③权限管理记录", "1、④审计追踪说明", "1、⑤备份策略与备份记录", "1、⑥灾难恢复演练", "1、⑦多协、鼎为的验证报告", "2、检查易流、安智验证报告数据完整性", "3、检查国尚信报警是否已经处理"], "owner": "1、莫虎；2、马宏宇；3、王会伟、阮海贝、范键楠", "dept": "信息部（IT）", "due": "9月11日前"}, {"id": "i602", "title": "· 业务连续性计划：运营管理", "en": "Business continuity plan: Operation management", "docs": ["收集各区域应急演练报告"], "owner": "许壮壮", "dept": "质量部", "due": "9月11日前"}, {"id": "i603", "title": "· 其他", "en": "Others", "docs": [], "owner": "", "dept": "", "due": ""}]}, {"id": "c7", "name": "附件——需提供文件清单", "desc": "按类别提交的文件清单（中英文对照保留原文）", "items": [{"id": "i701", "title": "[法规 Regulations] Site Master File——文件清单", "en": "Site Master File", "docs": [], "owner": "马宏宇", "dept": "质量部", "due": ""}, {"id": "i702", "title": "[产品与工艺] 近两年内生产的全部批次清单（至少两年；可根据供应商情况考虑更长时间范围）", "en": "List of all batches produced in the last two years (at a minimum, more time frame can be considered depending on the supplier)", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i703", "title": "[产品与工艺] 近两年内返工和再加工批次清单（至少两年）", "en": "List of batches reprocessed and reworked in the last two years (at a minimum)", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i704", "title": "[产品与工艺] 工艺流程图——项目操作手册", "en": "Process flow diagrams", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i705", "title": "[场所/厂房 Premises] 生产区域示意图，包括分区、人流和物流——参照安全", "en": "Schematic drawings of production areas, including zoning, personnel and material flows", "docs": [], "owner": "阮海贝、王会伟", "dept": "仓储部", "due": ""}, {"id": "i706", "title": "[变更控制 Change control] 自上次审计以来发生的重大变更清单（设施、生产工艺、清洁工艺、分析方法、计算机化系统等）", "en": "List of major changes in activities (facilities, manufacturing process, cleaning process, analytical methods, computerized systems, etc.) since last audit", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i707", "title": "[偏差/OOS] 近两年内偏差清单（含微小偏差）（至少两年；可根据供应商情况考虑更长时间范围）", "en": "List of deviations (including minor deviations) from the last two years", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i708", "title": "[偏差/OOS] 近两年内OOS（超标结果）清单（至少两年；可根据供应商情况考虑更长时间范围）", "en": "List of OOS from the last two years", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i709", "title": "[投诉/退货/召回] 近两年内投诉清单（至少两年；可根据供应商情况考虑更长时间范围）", "en": "List of Complaints from the last two years", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i710", "title": "[投诉/退货/召回] 近两年内召回清单（至少两年；可根据供应商情况考虑更长时间范围）", "en": "List of recalls for the last two years", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i711", "title": "[投诉/退货/召回] 近两年内退货清单（至少两年；可根据供应商情况考虑更长时间范围）", "en": "List of returns for the last two years", "docs": [], "owner": "", "dept": "", "due": ""}]}]};
 
 /* ===== 协同同步配置（GitHub 仓库共享库） ===== */
-const SYNC_TOKEN = 'github_pat_11CNHIMFI0PveoHme2N03X_PCHpRnGXThr5'+'EoPRtn7KTiSdKdih3RSxp2AbnHEkWA7HRSGACZNzA17pReP';
+const SYNC_TOKEN = 'github_pat_11CNHIMFI0PveoHme2N03X_PCHpRnGXThr5EoPRtn'+'7KTiSdKdih3RSxp2AbnHEkWA7HRSGACZNzA17pReP';
 const REPO = 'makacy-999/audit-checklist';
 const DATA_FILE = 'shared_data.json';
 const API_URL = 'https://api.github.com/repos/' + REPO + '/contents/' + DATA_FILE;
@@ -308,32 +308,43 @@ function toast(msg){
   clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('show'),2800);
 }
 
-/* ===== 权限：完成状态人人可改；备注/责任人=填写者+现任责任人+管理员(马宏宇) ===== */
+/* ===== 权限：管理员(马宏宇)全权限；未分配责任人条目=质量部(马宏宇/韩雪)专属填写；已分配条目=仅该责任人可修改打勾 ===== */
 const ADMIN_NAME='马宏宇';
+const ASSIGNERS=['马宏宇','韩雪'];
 function isAdminName(u){ return (u||'').trim()===ADMIN_NAME; }
+function isAssigner(u){ const t=(u||'').trim(); return !!t&&ASSIGNERS.indexOf(t)>=0; }
 function ownerList(itId){
   const o=cloud.owners[itId];
   const os=(o&&(o.owner||'').trim())?o.owner:(((findItem(itId)||{}).owner)||'');
-  return os.split(/[、,，;；]/).map(s=>s.trim()).filter(Boolean);
+  return os.split(/[、,，;；]/).map(s=>s.trim()).filter(s=>s&&!/^\d+$/.test(s));
 }
-function canEditCheck(key){ return !!userName; }
+function deniedHint(k){
+  const itId=k.includes('_')?k.split(/_(?=[^_]*$)/)[0]:k;
+  const list=ownerList(itId);
+  return list.length?('该条目由「'+list.join('、')+'」负责，仅责任人或管理员马宏宇可修改'):('该条目暂未分配责任人，由质量部马宏宇/韩雪统一填写和修改');
+}
+function canEditCheck(key){
+  if(!userName) return false;
+  if(isAdminName(userName)) return true;
+  const itId=key.includes('_')?key.split(/_(?=[^_]*$)/)[0]:key;
+  const list=ownerList(itId);
+  if(list.length===0) return isAssigner(userName);
+  return list.indexOf((userName||'').trim())>=0;
+}
 function canEditNote(key){
   if(!userName) return false;
   if(isAdminName(userName)) return true;
-  const n=cloud.notes[key];
-  if(!n||!(n.text||'').trim()) return true;
-  if(n.by===userName) return true;
   const itId=key.includes('_')?key.split(/_(?=[^_]*$)/)[0]:key;
-  return ownerList(itId).includes(userName);
+  const list=ownerList(itId);
+  if(list.length===0) return isAssigner(userName);
+  return list.indexOf((userName||'').trim())>=0;
 }
 function canEditOwner(id){
   if(!userName) return false;
   if(isAdminName(userName)) return true;
   const list=ownerList(id);
-  if(list.length===0) return true;
-  if(list.includes(userName)) return true;
-  const o=cloud.owners[id];
-  return !!(o && o.by===userName);
+  if(list.length===0) return isAssigner(userName);
+  return false;
 }
 function isEditing(){
   const a=document.activeElement;
@@ -569,14 +580,14 @@ function noteZoneHTML(key){
   const n=cloud.notes[key];
   if(n){
     const readonlyTxt = canEditNote(key) ? '' : '（'+esc(n.by||'同事')+' 填写）';
-    return '<div class="note-zone" data-zone="'+key+'"><div class="note-view" data-noteview="'+key+'" title="'+(canEditNote(key)?'点击编辑备注':'由 '+esc(n.by||'填写人')+' 填写，限本人、条目责任人或马宏宇编辑')+'">'+esc(n.text)+'<span class="who">— '+esc(n.by||'')+(readonlyTxt?' 🔒':'')+'</span></div></div>';
+    return '<div class="note-zone" data-zone="'+key+'"><div class="note-view" data-noteview="'+key+'" title="'+(canEditNote(key)?'点击编辑备注':'已由 '+esc(n.by||'同事')+' 填写，'+deniedHint(key))+'">'+esc(n.text)+'<span class="who">— '+esc(n.by||'')+(readonlyTxt?' 🔒':'')+'</span></div></div>';
   }
   return '<div class="note-zone" data-zone="'+key+'"></div>';
 }
 function renderPreserveScroll(){ const y=window.scrollY; render(); window.scrollTo(0,y); }
 function openNoteEditor(key){
   if(!userName){ toast('请先在右上角输入你的姓名'); return; }
-  if(!canEditNote(key)){ toast('该备注由「'+(cloud.notes[key].by||'同事')+'」填写，仅本人、条目责任人和马宏宇可编辑'); return; }
+  if(!canEditNote(key)){ toast('该备注由「'+(cloud.notes[key].by||'同事')+'」填写，'+deniedHint(key)); return; }
   const zone=document.querySelector('[data-zone="'+key+'"]');
   if(!zone) return;
   const ta=document.createElement('textarea');
@@ -613,7 +624,7 @@ function itemHTML(it){
   const done=!!c;
   const by=c?(c.by||''):'';
   const editable=canEditCheck(it.id);
-  const chkTitle=done?(editable?('由你于 '+fmtT(c.at)+' 勾选，点击可取消'):('由 '+by+' 于 '+fmtT(c.at)+' 勾选，仅本人可修改')):'点击勾选完成'+(userName?'':'（请先输入姓名）');
+  const chkTitle=done?(editable?('由你于 '+fmtT(c.at)+' 勾选，点击可取消'):('由 '+by+' 于 '+fmtT(c.at)+' 勾选，'+deniedHint(it.id))):'点击勾选完成'+(userName?'':'（请先输入姓名）');
   const ow=effOwner(it);
   const p=itemProgress(it);
   const docs=it.docs.map((d,i)=>{
@@ -625,7 +636,7 @@ function itemHTML(it){
     const hasNote=!!cloud.notes[nk];
     return '<li class="doc'+(ch?' is-done':'')+'" data-docrow="'+nk+'">'+
       '<input type="checkbox" data-chk="'+nk+'"'+(ch?' checked':'')+(ed?'':' disabled')+
-        ' title="'+(ch?(ed?('由你于 '+fmtT(cc.at)+' 勾选'):('由 '+w+' 于 '+fmtT(cc.at)+' 勾选，仅本人可修改')):'点击勾选核对')+'"'+
+        ' title="'+(ch?(ed?('由你于 '+fmtT(cc.at)+' 勾选'):('由 '+w+' 于 '+fmtT(cc.at)+' 勾选，'+deniedHint(nk))):'点击勾选核对')+'"'+
         ' aria-label="子项完成：'+esc(short(d,30))+'">'+
       '<span class="doc-text">'+esc(d)+(w?' <span class="byline" title="由 '+esc(w)+' 于 '+fmtT(cc.at)+' 勾选">'+(ed?'':'🔒 ')+esc(w)+'</span>':'')+'</span>'+
       '<button class="icon-btn'+(hasNote?' has-note':'')+'" data-notebtn="'+nk+'" title="备注" aria-label="备注">📝</button>'+
@@ -633,8 +644,7 @@ function itemHTML(it){
     '</li>';
   }).join('');
   const lockOwner=!canEditOwner(it.id);
-  const lockBy=lockOwner&&cloud.owners[it.id]?(cloud.owners[it.id].by||''):'';
-  const lockHint=lockOwner?('（由 '+esc(lockBy||'他人')+' 设置，限相关人修改）'):'';
+  const lockHint=lockOwner?(ow.owner?('（责任人：'+esc(ow.owner)+'，如需调整联系马宏宇）'):('（由质量部马宏宇/韩雪统一填写）')):'';
   const chips=
     '<button class="chip'+(ow.dept?' filled':'')+(lockOwner?' locked':'')+'" data-edit="dept" data-item="'+it.id+'" title="'+(lockOwner?'责任部门'+lockHint:(ow.dept?'点击修改责任部门':'点击填写责任部门'))+'">'+(ow.dept?('🏢 '+esc(ow.dept)):'+ 部门')+'</button>'+
     '<button class="chip'+(ow.owner?' filled':'')+(lockOwner?' locked':'')+'" data-edit="owner" data-item="'+it.id+'" title="'+(lockOwner?'责任人'+lockHint:(ow.owner?'点击修改责任人':'点击填写责任人'))+'">'+(ow.owner?('👤 '+esc(ow.owner)):'+ 责任人')+'</button>';
@@ -706,7 +716,7 @@ document.addEventListener('change',e=>{
     if(!userName){ t.checked=!!cloud.checks[key]; toast('请先在右上角输入你的姓名'); return; }
     if(!canEditCheck(key)){
       t.checked=!!cloud.checks[key];
-      toast('该项由「'+(cloud.checks[key].by||'同事')+'」勾选，仅本人可修改');
+      toast('该项由「'+(cloud.checks[key].by||'同事')+'」勾选，'+deniedHint(key));
       return;
     }
     const on=t.checked;
@@ -752,7 +762,7 @@ document.addEventListener('click',e=>{
     if(chip.classList.contains('locked')){
       const itId=chip.getAttribute('data-item');
       const o=cloud.owners[itId]||{};
-      toast('该项目的部门/责任人由「'+(o.by||'同事')+'」设置，仅本人可修改');
+      toast(deniedHint(itId));
       return;
     }
     startChipEdit(chip);
@@ -765,7 +775,7 @@ function startChipEdit(chip){
   const it=findItem(itId);
   if(!it) return;
   if(!userName){ toast('请先在右上角输入你的姓名'); return; }
-  if(!canEditOwner(itId)){ toast('该栏由「'+((cloud.owners[itId]||{}).by||'同事')+'」填写，仅填写者、现任责任人和马宏宇可修改'); return; }
+  if(!canEditOwner(itId)){ toast(deniedHint(itId)); return; }
   const cur=effOwner(it)[field]||'';
   const input=document.createElement('input');
   input.type='text'; input.className='chip-input'; input.value=cur;
