@@ -59,10 +59,10 @@ header.site{background:var(--card);border-bottom:1px solid var(--line)}
 .progress-card{max-width:1200px;margin:16px auto 0;padding:0 20px}
 .pc-in{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
 .pc-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:10px}
-.pc-num{font-size:26px;font-weight:700;color:var(--brand);font-variant-numeric:tabular-nums}
+.pc-num{font-size:26px;font-weight:700;color:var(--ok);font-variant-numeric:tabular-nums}
 .pc-label{color:var(--sub);font-size:13px}
 .bar{height:10px;background:#E9EEF6;border-radius:99px;overflow:hidden}
-.bar>span{display:block;height:100%;background:var(--brand);border-radius:99px;transition:width .3s ease}
+.bar>span{display:block;height:100%;background:linear-gradient(90deg,#1F9468,var(--ok));border-radius:99px;transition:width .3s ease}
 .cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 18px;margin-top:14px}
 .cat-mini{font-size:12.5px;color:var(--sub)}
 .cat-mini .cm-head{display:flex;justify-content:space-between;gap:8px;margin-bottom:4px}
@@ -80,18 +80,19 @@ section.cat>h2 .cnt{font-size:12px;color:var(--sub);font-weight:400}
 .cat-desc{color:var(--sub);font-size:12.5px;margin:0 0 10px}
 .items{display:grid;gap:10px}
 article.item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px}
-article.item.is-done{background:#FAFCFB}
+article.item.is-done{background:#F3FBF7;border-color:#CBE9DB;box-shadow:inset 3px 0 0 var(--ok)}
 .item-head{display:flex;align-items:flex-start;gap:10px}
-input[type=checkbox]{width:17px;height:17px;accent-color:var(--brand);cursor:pointer;flex:none;margin-top:3px}
+input[type=checkbox]{width:20px;height:20px;accent-color:var(--ok);cursor:pointer;flex:none;margin-top:2px}
 input[type=checkbox]:disabled{cursor:not-allowed}
 .item-main{flex:1;min-width:0}
 .item-title{font-weight:600;font-size:14px}
-.is-done .item-title{color:var(--sub);text-decoration:line-through;text-decoration-color:#B9C4D6;text-decoration-thickness:1px}
+.is-done .item-title{color:var(--ink)}
+.is-done .item-title::before{content:"\2713";display:inline-block;width:19px;height:19px;line-height:19px;text-align:center;margin-right:8px;background:var(--ok);color:#fff;border-radius:50%;font-size:13px;font-weight:700;vertical-align:-3px}
 .item-en{color:#93A1B7;font-size:11.5px;margin-top:1px;overflow-wrap:anywhere}
 .badge-due{flex:none;background:var(--warn-bg);color:var(--warn-ink);font-size:11.5px;border-radius:99px;padding:2px 9px;white-space:nowrap;margin-top:2px}
 .byline{font-size:11px;color:#8B99B0;background:#F1F5FB;border-radius:99px;padding:1px 8px;margin-left:6px;white-space:nowrap;font-weight:400;text-decoration:none;display:inline-block;transform:translateY(-1px)}
 .chips{display:flex;flex-wrap:wrap;gap:6px;flex:none;justify-content:flex-end}
-.chip{border:1px dashed #C8D3E6;background:#FBFCFE;color:var(--sub);border-radius:99px;padding:2px 10px;font-size:12px;cursor:pointer;max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:border-color .15s,color .15s}
+.chip{border:1px dashed #C8D3E6;background:#FBFCFE;color:var(--sub);border-radius:99px;padding:3px 12px;font-size:12.5px;cursor:pointer;max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:border-color .15s,color .15s,background .15s}
 .chip:hover{border-color:var(--brand);color:var(--brand)}
 .chip.filled{border-style:solid;background:var(--brand-weak);color:var(--note-ink);border-color:#D5E3FF}
 .chip.locked{cursor:not-allowed;color:#9AA7BC;background:#F3F5F9;border-color:#E6EAF2;border-style:solid}
@@ -102,11 +103,14 @@ input[type=checkbox]:disabled{cursor:not-allowed}
 .chip-input{width:170px;padding:3px 8px;border:1px solid var(--brand);border-radius:99px;font-size:12px;color:var(--ink)}
 /* docs */
 .docs{list-style:none;margin:10px 0 0;padding:0 0 0 27px;display:grid;gap:4px}
-.doc{display:flex;align-items:flex-start;gap:8px;padding:3px 0;border-top:1px dashed #EEF1F7}
+.doc{display:flex;align-items:flex-start;gap:8px;padding:5px 4px;border-top:1px dashed #EEF1F7;transition:background .15s}
 .doc:first-child{border-top:none}
-.doc input[type=checkbox]{width:15px;height:15px;margin-top:3px}
+.doc input[type=checkbox]{width:18px;height:18px;margin-top:2px}
 .doc-text{flex:1;min-width:0;font-size:13px;overflow-wrap:anywhere}
-.doc.is-done .doc-text{color:var(--sub);text-decoration:line-through;text-decoration-color:#B9C4D6}
+.doc:hover{background:#F6F9FD;border-radius:6px}
+.doc.is-done{background:#F3FBF7;border-radius:6px}
+.doc.is-done .doc-text{color:var(--ink)}
+.doc.is-done .doc-text::before{content:"\2713";color:var(--ok);font-weight:700;margin-right:5px}
 .doc .byline{transform:translateY(-1px)}
 .doc-count{margin-left:27px;margin-top:8px;font-size:12px;color:var(--sub)}
 /* notes */
@@ -174,7 +178,7 @@ body.collapsed .docs,body.collapsed .doc-count{display:none}
     <div class="head-t">
       <h1>应对审计核对清单 · Checklist<span class="ver">多人协同版</span></h1>
       <p>内容依据：《09:17审计日程和需提供的文件清单.xlsx》整理（第一天审计日程 + 附件-需提供文件清单），描述与顺序保留原文</p>
-      <p>协同规则：所有人共用同一份数据；勾选、备注、责任人修改均署填写人姓名；每项内容仅填写人本人可再次修改或删除，他人只读。</p>
+      <p>协同规则：所有人共用同一份数据，操作自动署名并实时同步；<b>完成状态人人可勾</b>、<b>备注人人可填</b>；已填写内容的修改权归填写者本人、该条目责任人和管理员（马宏宇）；任何人都不能删除他人填写的内容。</p>
     </div>
     <div class="user-box">
       <label for="userName">操作人</label>
@@ -188,7 +192,7 @@ body.collapsed .docs,body.collapsed .doc-count{display:none}
   <span id="syncText">正在初始化…</span>
   <button class="btn ghost" id="refreshBtn" type="button">🔄 立即刷新</button>
 </div>
-<div class="lock-strip" id="lockStrip" hidden><span>请先在右上角「操作人」输入你的姓名，再开始勾选或填写。数据为全组共享：你填写的内容会自动保存并同步给所有同事；每个人只能修改自己填写的内容，不能改动或删除他人填写的内容。</span></div>
+<div class="lock-strip" id="lockStrip" hidden><span>请先在右上角「操作人」输入你的姓名，再开始勾选或填写。数据为全组共享：你填写的内容会自动保存并同步给所有同事；完成状态人人可勾、备注人人可填；已填写内容仅填写者、该条目责任人和管理员马宏宇可再修改，任何人都不能删除他人填写的内容。</span></div>
 
 <div class="toolbar">
   <div class="tb-in">
@@ -237,9 +241,9 @@ body.collapsed .docs,body.collapsed .doc-count{display:none}
     <ul>
       <li>👤 首次使用：在右上角输入<b>你的姓名</b>（浏览器会记住），之后所有操作自动署名。</li>
       <li>☁️ 数据<b>保存在云端共享库</b>：A 同事填写后，B 同事打开同一页面即可看到；页面每 30 秒自动刷新，也可点「立即刷新」。</li>
-      <li>🔒 权限规则：你勾选的状态、写的备注、改的责任部门/责任人，<b>只有你本人能再次修改或删除</b>；其他同事看到的是锁定只读（显示填写人姓名），<b>任何人不能删除他人填写的内容</b>。</li>
+      <li>🔒 权限规则：<b>完成状态人人可勾、备注人人可填</b>；已填写的备注/责任人由<b>填写者本人、该条目责任人</b>再修改；<b>任何人不能删除他人填写的内容</b>；管理员<b>马宏宇</b>可修改全部内容。</li>
       <li>✅ 点击复选框勾选/取消，📊 进度条实时统计全员完成情况；📝 点击 📝 按钮或备注条添加/编辑自己的备注。</li>
-      <li>✏️ 点击「部门 / 责任人」标签修改；未被认领的项目任何人可先认领填写，认领后归填写人管理。</li>
+      <li>✏️ 点击「部门 / 责任人」标签修改：没写责任人名字的条目人人可填；写了自己名字的条目，你也能编辑它的备注；所有修改自动留痕。</li>
       <li>🕘 操作日志记录全员的每次操作（谁、什么时间、做了什么），日志自动保留最近 500 条，不可手动清空。</li>
       <li>📥 导出 JSON 会打包当前全员共享数据用于备份；🧹「清除我的记录」只清除你本人填写的内容，不影响他人。</li>
       <li>⚠️ 每次修改都会以提交记录形式保存在共享库中（可追溯历史）；如需找回被覆盖的内容可联系管理员从历史版本恢复。</li>
