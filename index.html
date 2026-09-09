@@ -242,7 +242,7 @@ body.collapsed .docs,body.collapsed .doc-count{display:none}
       <li>👤 首次使用：在右上角输入<b>你的姓名</b>（浏览器会记住），之后所有操作自动署名。</li>
       <li>☁️ 数据<b>保存在云端共享库</b>：A 同事填写后，B 同事打开同一页面即可看到；页面每 30 秒自动刷新，也可点「立即刷新」。</li>
       <li>🔒 权限规则：<b>未写责任人的条目</b>由质量部<b>马宏宇、韩雪</b>统一填写（含部门/责任人）和修改；<b>已写明责任人的条目</b>仅该责任人可修改与打勾，不能修改其他人的；<b>任何人不能删除他人填写的内容</b>；管理员<b>马宏宇</b>可修改全部内容。</li>
-      <li>✅ 点击复选框勾选/取消，📊 进度条实时统计全员完成情况；📝 点击 📝 按钮或备注条添加/编辑自己的备注。</li>
+      <li>✅ 点击复选框勾选/取消，<b>勾选主项会同时勾选其全部子项</b>（取消同理）；📊 进度条实时统计全员完成情况；📝 点击 📝 按钮或备注条添加/编辑自己的备注。</li>
       <li>✏️ 点击「部门 / 责任人」标签：未写责任人的条目由马宏宇、韩雪填写部门与责任人；已分配条目的归属调整由管理员马宏宇操作；所有修改自动留痕。</li>
       <li>🕘 操作日志记录全员的每次操作（谁、什么时间、做了什么），日志自动保留最近 500 条，不可手动清空。</li>
       <li>📥 导出 JSON 会打包当前全员共享数据用于备份；🧹「清除我的记录」只清除你本人填写的内容，不影响他人。</li>
@@ -345,6 +345,21 @@ function canEditOwner(id){
   const list=ownerList(id);
   if(list.length===0) return isAssigner(userName);
   return false;
+}
+/* 主项批量开关：勾选/取消主项时同步全部子项（署名同一操作人），返回受影响键列表 */
+function applyItemToggle(itId,on){
+  const it=findItem(itId);
+  if(!it) return [];
+  const keys=[it.id];
+  if(on) cloud.checks[it.id]={checked:true, by:userName, at:nowISO()}; else delete cloud.checks[it.id];
+  dirty.add('checks:'+it.id);
+  it.docs.forEach((d,i)=>{
+    const nk=it.id+'_'+i;
+    if(on) cloud.checks[nk]={checked:true, by:userName, at:nowISO()}; else delete cloud.checks[nk];
+    dirty.add('checks:'+nk);
+    keys.push(nk);
+  });
+  return keys;
 }
 function isEditing(){
   const a=document.activeElement;
@@ -624,7 +639,7 @@ function itemHTML(it){
   const done=!!c;
   const by=c?(c.by||''):'';
   const editable=canEditCheck(it.id);
-  const chkTitle=done?(editable?('由你于 '+fmtT(c.at)+' 勾选，点击可取消'):('由 '+by+' 于 '+fmtT(c.at)+' 勾选，'+deniedHint(it.id))):'点击勾选完成'+(userName?'':'（请先输入姓名）');
+  const chkTitle=done?(editable?('由你于 '+fmtT(c.at)+' 勾选，点击可取消'+(it.docs.length?('（将同时取消全部子项）'):'')):('由 '+by+' 于 '+fmtT(c.at)+' 勾选，'+deniedHint(it.id))):'点击勾选完成'+(it.docs.length?('（将同时勾选 '+it.docs.length+' 个子项）'):'')+(userName?'':'（请先输入姓名）');
   const ow=effOwner(it);
   const p=itemProgress(it);
   const docs=it.docs.map((d,i)=>{
@@ -720,14 +735,23 @@ document.addEventListener('change',e=>{
       return;
     }
     const on=t.checked;
-    if(on) cloud.checks[key]={checked:true, by:userName, at:nowISO()}; else delete cloud.checks[key];
-    dirty.add('checks:'+key);
-    persistCache();
     const itId=key.includes('_')?key.split(/_(?=[^_]*$)/)[0]:key;
     const it=findItem(itId);
+    let batchN=0;
+    if(key===itId && it){
+      const ks=applyItemToggle(it.id,on);
+      batchN=Math.max(0,ks.length-1);
+    } else {
+      if(on) cloud.checks[key]={checked:true, by:userName, at:nowISO()}; else delete cloud.checks[key];
+      dirty.add('checks:'+key);
+    }
+    persistCache();
     const card=document.querySelector('[data-itemcard="'+itId+'"]');
     const row=document.querySelector('[data-docrow="'+key+'"]');
-    if(key===itId && card){ card.classList.toggle('is-done',on); }
+    if(key===itId && it && card){
+      const tmp=document.createElement('div'); tmp.innerHTML=itemHTML(it);
+      if(tmp.firstElementChild) card.replaceWith(tmp.firstElementChild);
+    }
     if(key!==itId && row){ row.classList.toggle('is-done',on); }
     if(it){
       const cnt=document.querySelector('[data-count="'+itId+'"]');
@@ -735,7 +759,7 @@ document.addEventListener('change',e=>{
     }
     updateProgress();
     if(it){
-      if(key===itId) addLog((on?'✔ 完成主项「':'✘ 取消主项「')+short(it.title,36)+'」');
+      if(key===itId) addLog((on?'✔ 完成主项「':'✘ 取消主项「')+short(it.title,36)+'」'+(batchN?('（含 '+batchN+' 个子项一并'+(on?'勾选':'取消')+'）'):''));
       else{
         const idx=parseInt(key.split(/_(?=[^_]*$)/)[1],10);
         addLog((on?'✔ 勾选子项「':'✘ 取消子项「')+short(it.docs[idx]||'',30)+'」（'+short(it.title,24)+'）');
