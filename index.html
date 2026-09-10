@@ -268,6 +268,7 @@ body.collapsed .docs,body.collapsed .doc-count{display:none}
     <ul>
       <li>👤 首次使用：在右上角输入<b>你的姓名</b>（浏览器会记住），之后所有操作自动署名。</li>
       <li>☁️ 数据<b>保存在云端共享库</b>：A 同事填写后，B 同事打开同一页面即可看到；页面每 30 秒自动刷新，也可点「立即刷新」。</li>
+      <li>🔍 搜索规则：搜索<b>员工姓名</b>时，多人负责的条目只显示该员工负责的子项；搜索<b>内容关键词</b>时只显示命中的子项；搜索标题/部门等条目级信息时显示完整条目。</li>
       <li>🔒 权限规则：<b>未写责任人的条目</b>由质量部<b>马宏宇、韩雪</b>统一填写（含部门/责任人）和修改；<b>已写明责任人的条目</b>仅该责任人可修改与打勾；<b>子项有独立责任人时以子项为准</b>，仅该子项责任人可勾选/备注；多人条目请各自勾选自己负责的子项，批量勾选仅管理员可操作；<b>任何人不能删除他人填写的内容</b>；管理员<b>马宏宇</b>可修改全部内容。</li>
       <li>✅ 点击复选框勾选/取消，<b>勾选主项会同时勾选其全部子项</b>（取消同理）；📊 进度条实时统计全员完成情况；📝 点击 📝 按钮或备注条添加/编辑自己的备注。</li>
       <li>✏️ 点击「部门 / 责任人」标签：未写责任人的条目由马宏宇、韩雪填写部门与责任人；已分配条目的归属调整由管理员马宏宇操作；所有修改自动留痕。</li>
@@ -1450,15 +1451,40 @@ function matchFilter(it,cat){
   if(filters.kw){
     const kw=filters.kw.trim().toLowerCase();
     if(kw){
-      const mainNote=(cloud.notes[it.id]||{}).text||'';
-      const docNotes=it.docs.map((_,i)=>((cloud.notes[it.id+'_'+i]||{}).text||'')).join(' ');
-      const hay=[it.title,it.en,it.owner,it.dept,it.due,ow.owner,ow.dept,
-        it.docs.join(' '),(it.docsO||[]).join(' '), mainNote, docNotes
-      ].join(' ').toLowerCase();
-      if(!hay.includes(kw)) return false;
+      if(computeScope(it, kw)===null) return false;
     }
   }
   return true;
+}
+
+/* ===== 搜索范围 =====
+   返回 'all'（显示整块含全部子项）| Set(子项索引)（仅显示这些子项，可为空集=只显示主项行）| null（不显示该条目）
+   规则：条目级字段（标题/英文/部门/时限/备注/单人责任人）命中→整块；
+   多人主项按责任人名搜索→仅显示该人相关的子项（不显示他人子项）；
+   仅子项内容/子项责任人/子项备注命中→仅显示命中子项 */
+function subHitsOf(it, kw){
+  const hits=new Set();
+  it.docs.forEach((d,i)=>{
+    const nk=it.id+'_'+i;
+    const so=subOwnerList(nk).join(' ');
+    const sn=((cloud.notes[nk]||{}).text)||'';
+    if((d+' '+((it.docsO||{})[i]||'')+' '+so+' '+sn).toLowerCase().includes(kw)) hits.add(i);
+  });
+  return hits;
+}
+function computeScope(it, kwRaw){
+  const kw=(kwRaw||'').trim().toLowerCase();
+  if(!kw) return 'all';
+  const ow=effOwner(it);
+  const mainNote=(cloud.notes[it.id]||{}).text||'';
+  const mTitle=[it.title,it.en,it.dept,it.due,(ow.dept||''),mainNote].join(' ').toLowerCase().includes(kw);
+  if(mTitle) return 'all';
+  const ol=ownerList(it.id);
+  const mOwner=ol.join(' ').toLowerCase().includes(kw);
+  if(mOwner && ol.length>1 && it.docs.length>0) return subHitsOf(it, kw);
+  if(mOwner) return 'all';
+  const hits=subHitsOf(it, kw);
+  return hits.size? hits : null;
 }
 
 /* ===== 筛选选项 ===== */
@@ -1524,7 +1550,7 @@ function noteLabel(key){
 }
 function findItem(id){ for(const c of DATA.categories) for(const it of c.items) if(it.id===id) return it; return null; }
 
-function itemHTML(it){
+function itemHTML(it, subFilter){
   const c=cloud.checks[it.id];
   const done=!!c;
   const by=c?(c.by||''):'';
@@ -1535,6 +1561,7 @@ function itemHTML(it){
   const ow=effOwner(it);
   const p=itemProgress(it);
   const docs=it.docs.map((d,i)=>{
+    if(subFilter && subFilter!=='all' && !subFilter.has(i)) return '';
     const nk=it.id+'_'+i;
     const cc=cloud.checks[nk];
     const ch=!!cc;
@@ -1571,7 +1598,7 @@ function itemHTML(it){
       '<button class="icon-btn'+(hasNote?' has-note':'')+'" data-notebtn="'+it.id+'" title="备注" aria-label="备注">📝</button>'+
     '</div>'+
     (hasNote? noteZoneHTML(it.id):'')+
-    (it.docs.length?('<ul class="docs">'+docs+'</ul><div class="doc-count" data-count="'+it.id+'">资料子项 '+subDone(it)+'/'+it.docs.length+' 已核对</div>'):'')+
+    (it.docs.length?((docs?('<ul class="docs">'+docs+'</ul>'):'')+'<div class="doc-count" data-count="'+it.id+'">资料子项 '+subDone(it)+'/'+it.docs.length+' 已核对</div>'):'')+
   '</article>';
 }
 function subDone(it){ let d=0; it.docs.forEach((_,i)=>{ if(cloud.checks[it.id+'_'+i]) d++; }); return d; }
@@ -1587,7 +1614,7 @@ function render(){
     return '<section class="cat" id="sec-'+c.id+'">'+
       '<h2>'+esc(c.name)+'<span class="cnt">'+cp.d+'/'+cp.t+' 单元</span></h2>'+
       (c.desc?'<p class="cat-desc">'+esc(c.desc)+'</p>':'')+
-      '<div class="items">'+items.map(itemHTML).join('')+'</div>'+
+      '<div class="items">'+items.map(it=>itemHTML(it, computeScope(it, filters.kw))).join('')+'</div>'+
     '</section>';
   }).join('');
   listEl.innerHTML= html || '<div class="empty"><b>没有匹配的项目</b>试试调整关键词或筛选条件</div>';
