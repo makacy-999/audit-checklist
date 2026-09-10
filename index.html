@@ -282,7 +282,670 @@ body.collapsed .docs,body.collapsed .doc-count{display:none}
 
 <script>
 'use strict';
-const DATA = {"title": "应对审计核对清单", "source": "内容依据：《09:17审计日程和需提供的文件清单.xlsx》整理（第一天审计日程 + 附件-需提供文件清单），描述与顺序保留原文", "note": "责任部门为按职责推断的建议值，点击即可修改；原文未指定责任人的项目请内部确认后填写。", "categories": [{"id": "c1", "name": "开场介绍（09:00-09:30）", "desc": "", "items": [{"id": "i101", "title": "相关人员介绍", "en": "Introduction of the involved people", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i102", "title": "现场管理层开场报告（约30分钟），至少包含以下内容（如适用）", "en": "Opening Presentations from Site Management (about 30 min.)", "docs": ["公司介绍PPT", "· 设施布局及面积详情（含土地总面积、建筑/楼栋总数、建筑面积等）", "· 产品清单；车辆清单", "· 生产描述（含关键点）", "· 组织架构图", "· 物料流向", "· 监管机构检查情况（含审计日期、范围及结果）——近三年无延伸检查", "· 总员工人数（按部门，含临时/合同人员）——资料：花名册", "· 国内外卫生监管机构颁发的许可证与证书——资料：公司介绍ppt"], "owner": "", "dept": "", "due": ""}, {"id": "i103", "title": "审计议程确认", "en": "Review of Audit Agenda", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i104", "title": "上次审计/检查纠正措施（CAPA）计划的进展", "en": "Progress on the corrective action plan from previous audit / inspection", "docs": ["整改附件", "泰州审计整改附件", "2022年华北区审计整改资料"], "owner": "马宏宇、张雅芳、洪老师", "dept": "质量部", "due": "9月11日前"}]}, {"id": "c2", "name": "现场巡视（09:30-12:00）", "desc": "现场巡视并沿物料流向开展审计（临时仓储或带拖车的货车），检查内容不限于以下各项", "items": [{"id": "i201", "title": "现场巡视自查：各区域标识、划分、现场卫生", "en": "Site tour and audit following the material flow", "docs": [], "owner": "王会伟、阮海贝", "dept": "仓储部", "due": "9月11日前"}, {"id": "i202", "title": "· 收货区域", "en": "Receiving area", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i203", "title": "· 订单处理", "en": "Order Processing", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i204", "title": "· 库存控制", "en": "Inventory Control", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i205", "title": "· 存储区域，包括冷库及受控区域（麻醉药品、危险品等）", "en": "Storage areas, including cold chambers and secured area (narcotics, hazardous etc.)", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i206", "title": "· 订单拣选和发货区域", "en": "Order preparation and shipping areas", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i207", "title": "· 特定产品的管理与流转：如处于“暂停放行”或“待检隔离”状态的产品、温控产品、受控产品（如麻醉药品）等", "en": "Management and flow of specific products", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i208", "title": "· 外部仓库（如适用）", "en": "External warehouse (if applicable)", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i209", "title": "· 场所（临时存储）：安保；虫害控制；清洁、维护；区域内温度管理（阴凉、冷藏、冷冻区域）", "en": "Premises (temporary storage)", "docs": ["①安保制度、门禁记录、监控点位图", "②粘鼠板更换记录、灭蝇灯检查记录", "③库房清洁记录"], "owner": "王会伟、阮海贝", "dept": "仓储部", "due": "9月11日前"}, {"id": "i210", "title": "· 车辆：安保；清洁/卫生/状态；温度控制与监测；通信系统（如GPS）", "en": "Vehicle: Security; Cleaning / hygiene / conditions; Temperature control and monitoring; Communication system (e.g. GPS)", "docs": ["1、①赛诺菲使用所有车辆的完整台账", "1、②赛诺菲使用所有车辆的清洁/卫生记录", "1、③赛诺菲使用所有车辆的维护保养记录——并确认系统和线下的维保情况是否一致", "1、④验证报告", "1、⑤准备一辆车（需要有验证报告）和一位司机（可能现场回答问题）", "2、检查赛诺菲相关的超温报警是否都已经处理完成", "3、自查封签发放、使用记录"], "owner": "1、赵宽宽、成建成、刘科；2、王晓娜；3、高艳琼、张雅芳、洪老师", "dept": "运输部", "due": "9月11日前"}, {"id": "i211", "title": "· 蓄冷包/冰排管理", "en": "Management of cool pack", "docs": ["1、冰排出入库记录、预冷记录、泰州业务包装记录", "2、广州保温罩预冷记录、出入库记录"], "owner": "1、阮海贝；2、高艳琼", "dept": "仓储部", "due": "9月11日前"}, {"id": "i212", "title": "· 温控车辆及其设施和记录", "en": "Temperature controlled vehicle and its facilities and records", "docs": ["①温控车温度分布验证报告——区域提交研发部，经过审核后才可以提交客户查看。未经审核不能提供给客户。", "②在途温度记录仪数据", "③温度监测设备校准证书"], "owner": "牛晨涛", "dept": "设备工程部", "due": ""}, {"id": "i213", "title": "· 运输服务追踪系统", "en": "Shipment service tracking system", "docs": ["1、①安智、易流系统说明/演示", "1、②各系统权限清单——离职人员的权限是否已经关闭；赛诺菲关键人员的系统权限是否符合角色", "2、①异常处理记录", "2、②24小时监控岗的系统操作日志中有无共用账号的情况", "3、①至少检查2026年1月至现在的所有赛诺菲订单运输节点，使用的供应商是否是备案的供应商（由魏慧提供检查明细）", "3、②每个订单在系统中的交付文件清单（随货同行单、温控记录单、签收单等），节点有无逻辑不通的问题", "3、③有无使用客户账号上传的问题"], "owner": "1、莫虎；2、王晓娜；3、魏慧、苏兰花、李冰燕", "dept": "信息部（IT）", "due": "2、9月14日"}, {"id": "i214", "title": "· 安全、安保、环境监测", "en": "Safety, security, environment monitoring", "docs": ["参考安全审计清单"], "owner": "", "dept": "", "due": ""}, {"id": "i215", "title": "· 其他", "en": "Others", "docs": [], "owner": "", "dept": "", "due": ""}]}, {"id": "c3", "name": "文件审查——质量管理（13:00-16:30）", "desc": "", "items": [{"id": "i301", "title": "· 人员——培训", "en": "Personnel – Training", "docs": ["①年度培训计划", "②培训记录（新员工、岗位、年度、专项培训）", "③培训考核记录", "④各岗位培训矩阵（岗位-技能-人员对应）", "⑤人员健康证/体检记录", "⑥各区域质量检查供应商月度安全培训记录——培训人员是否齐全"], "owner": "高艳琼、张雅芳、洪老师", "dept": "质量部", "due": "9月11日前"}, {"id": "i302", "title": "· 卫生与安全（如易燃物、危险品、细胞毒性药物的处理，木托盘）", "en": "Hygiene and Safety", "docs": ["检查库房内所有木托盘是否都有熏蒸标识——如果没有熏蒸标识需要在库外暂存"], "owner": "阮海贝、王会伟", "dept": "仓储部", "due": "9月11日前"}, {"id": "i303", "title": "· 文件管理系统、标准操作规程（SOP）", "en": "Document Management System, SOPs", "docs": ["1、①文件管理SOP", "1、②受控文件清单/台账", "1、③SOP目录", "1、④文件分发/回收记录", "1、⑤文件修订历史与审批记录", "1、⑥作废文件管理记录", "2、库房内的文件必须有发放记录现行有效版本", "2、库房内记录必须有打印序列号"], "owner": "1、马宏宇、许壮壮；2、洪老师、张雅芳、高艳琼", "dept": "质量部", "due": "9月11日前"}, {"id": "i304", "title": "· 偏差与纠正预防措施（CAPA）", "en": "Deviation & Corrective and Preventive Action (CAPA)", "docs": ["①偏差处理SOP", "②偏差台账（含关闭状态）", "③偏差调查报告样本（含根因分析）", "④CAPA管理SOP", "⑤CAPA台账", "⑥CAPA有效性评估记录"], "owner": "许壮壮", "dept": "质量部", "due": "9月11日前"}, {"id": "i305", "title": "· 变更控制", "en": "Change control", "docs": ["①变更控制SOP", "②变更台账", "③变更评估与批准记录", "④变更实施与验证记录"], "owner": "马宏宇", "dept": "质量部", "due": "9月11日前"}, {"id": "i306", "title": "· 运输投诉处理", "en": "Transport complaint handling", "docs": ["①投诉处理SOP", "②投诉台账", "③投诉调查与处理记录（根因+纠正措施）", "④向客户反馈的记录"], "owner": "许壮壮", "dept": "质量部", "due": "9月11日前"}, {"id": "i307", "title": "· 审计与自检", "en": "Audits & Self-inspection", "docs": ["①自检SOP", "②自检计划（年度）", "③自检报告（含上次）", "④自检发现项CAPA", "⑤内审员资质证明", "⑥对供应商/分包商审计计划与报告"], "owner": "马宏宇", "dept": "质量部", "due": "9月12日前"}, {"id": "i308", "title": "· 分包商管理", "en": "Subcontractors' management", "docs": ["①分包商清单", "②赛诺菲在用供应商的分包协议/质量协议", "③分包商资质审计与评估记录", "④分包商绩效评估"], "owner": "臧益岐", "dept": "供应商管理部", "due": "9月13日前"}, {"id": "i309", "title": "· 客户相关流程：与物料相关的客户特殊要求的确定与评审；客户沟通；客户投诉", "en": "Customer related process", "docs": ["①项目操作手册", "②客户投诉台账与处理"], "owner": "", "dept": "", "due": "9月11日前"}]}, {"id": "c4", "name": "文件审查——车辆", "desc": "", "items": [{"id": "i401", "title": "· 温控图/温度分布验证与确认", "en": "Mapping Validation / Qualification", "docs": ["参考温控车验证部分"], "owner": "", "dept": "", "due": ""}, {"id": "i402", "title": "· 维护/更新计划", "en": "Maintenance / renewal program", "docs": ["赛诺菲使用车辆的维护保养记录"], "owner": "", "dept": "", "due": ""}, {"id": "i403", "title": "· 校准", "en": "Calibration", "docs": ["①校准管理SOP", "②年度校准计划（线下台账）", "③校准证书（温度记录仪、探头、温湿度计）"], "owner": "牛晨涛", "dept": "设备工程部", "due": "9月11日前"}]}, {"id": "c5", "name": "文件审查——运营", "desc": "", "items": [{"id": "i501", "title": "· 运输计划（含控制点）", "en": "Transport plan (including control points)", "docs": ["1、可能需要现场演示调度系统、对应的记录——（1）整车：订单-派车；（2）零担", "2、包含控制点的系统验证报告"], "owner": "（1）整车：赵宽宽；（2）零担：李超阳", "dept": "运输部", "due": "9月11日前"}, {"id": "i502", "title": "· 装卸货报告", "en": "Loading and unloading report", "docs": ["待确定"], "owner": "", "dept": "", "due": ""}, {"id": "i503", "title": "· 车辆及文件的追踪与追溯（如信息系统和备份）", "en": "Tracking and tracing of vehicles and documentation (e.g. IS and back-up)", "docs": ["①数据备份记录演示"], "owner": "莫虎", "dept": "信息部（IT）", "due": "9月11日演示"}, {"id": "i504", "title": "· 交付文件", "en": "Delivery documentation", "docs": ["参考系统检查节点部分"], "owner": "", "dept": "", "due": ""}, {"id": "i505", "title": "· 退货流程", "en": "Return process", "docs": ["①退货SOP"], "owner": "苏兰花", "dept": "运营部", "due": ""}, {"id": "i506", "title": "· 蓄冷包/冰排管理", "en": "Management of cool pack", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i507", "title": "· 设备（如发电机）及其维护与校准", "en": "Equipment (e.g. generator) and their maintenance & calibration", "docs": ["参考安全审计清单"], "owner": "", "dept": "", "due": ""}]}, {"id": "c6", "name": "文件审查——计算机化系统", "desc": "", "items": [{"id": "i601", "title": "· GxP计算机化系统清单、系统描述、验证、备份、恢复计划", "en": "Inventory list of GxP computerized systems, System Description, validation, back-up, recovery Plan", "docs": ["1、①各系统权限清单（安智、易流、鼎为（深圳疫苗使用）、多协、国尚信）", "1、②验证文件（URS、IQ/OQ/PQ、验证报告）", "1、③权限管理记录", "1、④审计追踪说明", "1、⑤备份策略与备份记录", "1、⑥灾难恢复演练", "1、⑦多协、鼎为的验证报告", "2、检查易流、安智验证报告数据完整性", "3、检查国尚信报警是否已经处理"], "owner": "1、莫虎；2、马宏宇；3、王会伟、阮海贝、范键楠", "dept": "信息部（IT）", "due": "9月11日前"}, {"id": "i602", "title": "· 业务连续性计划：运营管理", "en": "Business continuity plan: Operation management", "docs": ["收集各区域应急演练报告"], "owner": "许壮壮", "dept": "质量部", "due": "9月11日前"}, {"id": "i603", "title": "· 其他", "en": "Others", "docs": [], "owner": "", "dept": "", "due": ""}]}, {"id": "c7", "name": "附件——需提供文件清单", "desc": "按类别提交的文件清单（中英文对照保留原文）", "items": [{"id": "i701", "title": "[法规 Regulations] Site Master File——文件清单", "en": "Site Master File", "docs": [], "owner": "马宏宇", "dept": "质量部", "due": ""}, {"id": "i702", "title": "[产品与工艺] 近两年内生产的全部批次清单（至少两年；可根据供应商情况考虑更长时间范围）", "en": "List of all batches produced in the last two years (at a minimum, more time frame can be considered depending on the supplier)", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i703", "title": "[产品与工艺] 近两年内返工和再加工批次清单（至少两年）", "en": "List of batches reprocessed and reworked in the last two years (at a minimum)", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i704", "title": "[产品与工艺] 工艺流程图——项目操作手册", "en": "Process flow diagrams", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i705", "title": "[场所/厂房 Premises] 生产区域示意图，包括分区、人流和物流——参照安全", "en": "Schematic drawings of production areas, including zoning, personnel and material flows", "docs": [], "owner": "阮海贝、王会伟", "dept": "仓储部", "due": ""}, {"id": "i706", "title": "[变更控制 Change control] 自上次审计以来发生的重大变更清单（设施、生产工艺、清洁工艺、分析方法、计算机化系统等）", "en": "List of major changes in activities (facilities, manufacturing process, cleaning process, analytical methods, computerized systems, etc.) since last audit", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i707", "title": "[偏差/OOS] 近两年内偏差清单（含微小偏差）（至少两年；可根据供应商情况考虑更长时间范围）", "en": "List of deviations (including minor deviations) from the last two years", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i708", "title": "[偏差/OOS] 近两年内OOS（超标结果）清单（至少两年；可根据供应商情况考虑更长时间范围）", "en": "List of OOS from the last two years", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i709", "title": "[投诉/退货/召回] 近两年内投诉清单（至少两年；可根据供应商情况考虑更长时间范围）", "en": "List of Complaints from the last two years", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i710", "title": "[投诉/退货/召回] 近两年内召回清单（至少两年；可根据供应商情况考虑更长时间范围）", "en": "List of recalls for the last two years", "docs": [], "owner": "", "dept": "", "due": ""}, {"id": "i711", "title": "[投诉/退货/召回] 近两年内退货清单（至少两年；可根据供应商情况考虑更长时间范围）", "en": "List of returns for the last two years", "docs": [], "owner": "", "dept": "", "due": ""}]}]};
+const DATA = {
+ "title": "应对审计核对清单",
+ "source": "内容依据：《资料准备分工-- V1.0.xlsx》整理（第一天审计日程 + 附件-需提供文件清单），描述与顺序保留原文",
+ "note": "责任人/责任部门/完成时间按 V1.0 分工表预填，点击即可修改；原文为“/”或空白的项目请内部确认后填写。勾选、备注与操作日志云端自动保存。",
+ "categories": [
+  {
+   "id": "c1",
+   "name": "开场介绍（09:00-09:30）",
+   "desc": "",
+   "items": [
+    {
+     "id": "i101",
+     "title": "相关人员介绍",
+     "en": "Introduction of the involved people",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i102",
+     "title": "现场管理层开场报告（约30分钟），至少包含以下内容（如适用）",
+     "en": "Opening Presentations from Site Management (about 30 min.)",
+     "docs": [
+      "公司介绍PPT",
+      "· 设施布局及面积详情（含土地总面积、建筑/楼栋总数、建筑面积等）",
+      "· 产品清单；车辆清单",
+      "· 生产描述（含关键点）",
+      "· 组织架构图",
+      "· 物料流向",
+      "· 监管机构检查情况（含审计日期、范围及结果）——资料：近三年无延伸检查",
+      "· 总员工人数（按部门，含临时/合同人员）——资料：花名册",
+      "· 国内外卫生监管机构颁发的许可证与证书——资料：公司介绍PPT"
+     ],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i103",
+     "title": "审计议程确认",
+     "en": "Review of Audit Agenda",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i104",
+     "title": "上次审计/检查纠正措施（CAPA）计划的进展",
+     "en": "Progress on the corrective action plan from previous audit / inspection",
+     "docs": [
+      "巡检整改附件——责任人：马宏宇",
+      "泰州审计整改附件——责任人：张雅芳",
+      "2022年华北区审计整改资料——责任人：洪霞"
+     ],
+     "owner": "马宏宇、张雅芳、洪霞",
+     "dept": "质量部",
+     "due": "9月11日前"
+    }
+   ]
+  },
+  {
+   "id": "c2",
+   "name": "现场巡视（09:30-12:00）",
+   "desc": "现场巡视并沿物料流向开展审计（临时仓储或带拖车的货车），检查内容不限于以下各项",
+   "items": [
+    {
+     "id": "i201",
+     "title": "现场巡视自查：各区域标识、划分、现场卫生",
+     "en": "Site tour and audit following the material flow (temporary storage or lorry with its trailer)",
+     "docs": [
+      "华北仓库现场检查：自查各区域标识、划分、现场卫生——责任人：王会伟",
+      "华东仓库现场检查：自查各区域标识、划分、现场卫生——责任人：阮海贝"
+     ],
+     "owner": "王会伟、阮海贝",
+     "dept": "仓储部",
+     "due": "9月11日前"
+    },
+    {
+     "id": "i202",
+     "title": "· 收货区域",
+     "en": "Receiving area",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i203",
+     "title": "· 订单处理",
+     "en": "Order Processing",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i204",
+     "title": "· 库存控制",
+     "en": "Inventory Control",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i205",
+     "title": "· 存储区域，包括冷库及受控区域（麻醉药品、危险品等）",
+     "en": "Storage areas, including cold chambers and secured area (narcotics, hazardous etc.)",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i206",
+     "title": "· 订单拣选和发货区域",
+     "en": "Order preparation and shipping areas",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i207",
+     "title": "· 特定产品的管理与流转：如处于“暂停放行”或“待检隔离”状态的产品、温控产品、受控产品（如麻醉药品）等",
+     "en": "Management and flow of specific products",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i208",
+     "title": "· 外部仓库（如适用）",
+     "en": "External warehouse (if applicable)",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i209",
+     "title": "· 场所（临时存储）：安保；虫害控制；清洁、维护；区域内温度管理（阴凉、冷藏、冷冻区域）",
+     "en": "Premises (temporary storage): Security; Pest Control; Cleaning, Maintenance; Temperature management within areas",
+     "docs": [
+      "华北区自查各类库房记录：①安保制度、门禁记录、监控点位图；②粘鼠板更换记录、灭蝇灯检查记录；③库房清洁记录——责任人：王会伟",
+      "华东区自查各类库房记录：①安保制度、门禁记录、监控点位图；②粘鼠板更换记录、灭蝇灯检查记录；③库房清洁记录——责任人：阮海贝"
+     ],
+     "owner": "王会伟、阮海贝",
+     "dept": "仓储部",
+     "due": "9月11日前"
+    },
+    {
+     "id": "i210",
+     "title": "· 车辆：安保；清洁/卫生/状态；温度控制与监测；通信系统（如GPS）",
+     "en": "Vehicle: Security; Cleaning / hygiene / conditions; Temperature control and monitoring; Communication system (e.g. GPS)",
+     "docs": [
+      "1-1、华北区：①赛诺菲使用所有车辆的完整台账；②清洁/卫生记录；③维护保养记录——并确认系统和线下维保情况是否一致；④验证报告；⑤准备一辆车（需要有验证报告）和一位司机（可能现场回答问题）——责任人：赵宽宽",
+      "1-2、华东区：检查内容同华北区（①完整台账；②清洁/卫生记录；③维护保养记录核对；④验证报告；⑤备车+司机）——责任人：成建成",
+      "1-3、华南区：检查内容同华北区——责任人：刘科",
+      "2、检查赛诺菲相关的超温报警是否都已经处理完成——责任人：王晓娜",
+      "3-1、华东区自查封签发放、使用记录是否完整——责任人：张雅芳",
+      "3-2、华北区自查封签发放、使用记录是否完整——责任人：高艳琼",
+      "3-3、华南区自查封签发放、使用记录是否完整——责任人：洪霞"
+     ],
+     "owner": "赵宽宽、成建成、刘科、王晓娜、张雅芳、高艳琼、洪霞",
+     "dept": "运输部",
+     "due": "9月11日前"
+    },
+    {
+     "id": "i211",
+     "title": "· 蓄冷包/冰排管理",
+     "en": "Management of cool pack",
+     "docs": [
+      "1、华东区：冰排出入库记录、预冷记录、泰州业务包装记录；赛诺菲（江苏）保温罩使用记录——责任人：阮海贝",
+      "2、广州保温罩预冷记录、出入库记录——责任人：高艳琼"
+     ],
+     "owner": "阮海贝、高艳琼",
+     "dept": "仓储部",
+     "due": "9月11日前"
+    },
+    {
+     "id": "i212",
+     "title": "· 温控车辆及其设施和记录",
+     "en": "Temperature controlled vehicle and its facilities and records",
+     "docs": [
+      "①温控车温度分布验证报告——区域提交研发部，经审核后才可提交客户查看，未经审核不能提供给客户；②在途温度记录仪数据；③温度监测设备校准证书——责任人：牛晨涛"
+     ],
+     "owner": "牛晨涛",
+     "dept": "设备工程部",
+     "due": "9月11日前"
+    },
+    {
+     "id": "i213",
+     "title": "· 运输服务追踪系统",
+     "en": "Shipment service tracking system",
+     "docs": [
+      "1、①安智、易流系统说明/演示；②各系统权限清单——离职人员的权限是否已经关闭；赛诺菲关键人员的系统权限是否符合角色——责任人：莫虎",
+      "2、①异常处理记录；②24小时监控岗的系统操作日志中有无共用账号的情况——责任人：王晓娜（9月14日前）",
+      "3-1、华北区：①至少检查2026年1月至今所有赛诺菲订单运输节点——使用的供应商是否为备案供应商（魏慧提供检查明细）；②每个订单在系统中的交付文件清单（随货同行单、温控记录单、签收单等），节点有无逻辑不通；③有无使用客户账号上传的问题——责任人：魏慧（9月14日前）",
+      "3-2、华东区：检查内容同华北区（①运输节点供应商备案核查；②订单交付文件清单核对；③客户账号上传问题）——责任人：苏兰花（9月14日前）",
+      "3-3、华南区：检查内容同华北区——责任人：李冰燕（9月14日前）"
+     ],
+     "owner": "莫虎、王晓娜、魏慧、苏兰花、李冰燕",
+     "dept": "信息部（IT）",
+     "due": "9月11日前"
+    },
+    {
+     "id": "i214",
+     "title": "· 安全、安保、环境监测",
+     "en": "Safety, security, environment monitoring",
+     "docs": [
+      "参考安全审计清单"
+     ],
+     "owner": "",
+     "dept": "安监部",
+     "due": ""
+    },
+    {
+     "id": "i215",
+     "title": "· 其他",
+     "en": "Others",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    }
+   ]
+  },
+  {
+   "id": "c3",
+   "name": "文件审查——质量管理（13:00-16:30）",
+   "desc": "文件审查：质量管理",
+   "items": [
+    {
+     "id": "i301",
+     "title": "· 人员——培训",
+     "en": "Personnel – Training",
+     "docs": [
+      "1、①年度培训计划；②培训记录（新员工、岗位、年度、专项培训）；③培训考核记录；④各岗位培训矩阵（岗位-技能-人员对应）；⑤人员健康证/体检记录——责任人：刘海鑫",
+      "2、华北区：①培训记录（新员工、岗位、年度、专项培训）；②培训考核记录；③各区域质量检查供应商月度安全培训记录——培训人员是否齐全——责任人：洪霞",
+      "3、华东区：检查内容同华北区——责任人：张雅芳",
+      "4、华南区：检查内容同华北区——责任人：高艳琼"
+     ],
+     "owner": "刘海鑫、洪霞、张雅芳、高艳琼",
+     "dept": "质量部、人事行政部",
+     "due": "9月11日前"
+    },
+    {
+     "id": "i302",
+     "title": "· 卫生与安全（如易燃物、危险品、细胞毒性药物的处理，木托盘）",
+     "en": "Hygiene and Safety (e.g. handling of flammable, hazardous, cytotoxics, wooden pallets)",
+     "docs": [
+      "华北区：检查库房内所有木托盘是否都有熏蒸标识——如果没有熏蒸标识需要在库外暂存——责任人：阮海贝",
+      "华东区：检查库房内所有木托盘是否都有熏蒸标识——如果没有熏蒸标识需要在库外暂存——责任人：王会伟"
+     ],
+     "owner": "阮海贝、王会伟",
+     "dept": "仓储部",
+     "due": "9月11日前"
+    },
+    {
+     "id": "i303",
+     "title": "· 文件管理系统、标准操作规程（SOP）",
+     "en": "Document Management System, SOPs",
+     "docs": [
+      "1、①文件管理SOP；②受控文件清单/台账；③SOP目录；④文件修订历史与审批记录；⑤作废文件管理记录——责任人：马宏宇、许壮壮",
+      "2-1、①库房内的文件必须有发放记录现行有效版本；②库房内记录必须有打印序列号；③日常的文件、记录分发/回收/销毁管理台账——责任人：洪霞",
+      "2-2、检查内容同2-1——责任人：张雅芳",
+      "2-3、检查内容同2-1——责任人：高艳琼"
+     ],
+     "owner": "马宏宇、许壮壮、洪霞、张雅芳、高艳琼",
+     "dept": "质量部",
+     "due": "9月11日前"
+    },
+    {
+     "id": "i304",
+     "title": "· 偏差与纠正预防措施（CAPA）",
+     "en": "Deviation & Corrective and Preventive Action (CAPA)",
+     "docs": [
+      "①偏差处理SOP",
+      "②偏差台账（含关闭状态）",
+      "③偏差调查报告样本（含根因分析）",
+      "④CAPA管理SOP",
+      "⑤CAPA台账",
+      "⑥CAPA有效性评估记录"
+     ],
+     "owner": "许壮壮",
+     "dept": "质量部",
+     "due": "9月11日前"
+    },
+    {
+     "id": "i305",
+     "title": "· 变更控制",
+     "en": "Change control",
+     "docs": [
+      "①变更控制SOP",
+      "②变更台账",
+      "③变更评估与批准记录",
+      "④变更实施与验证记录"
+     ],
+     "owner": "马宏宇",
+     "dept": "质量部",
+     "due": "9月11日前"
+    },
+    {
+     "id": "i306",
+     "title": "· 运输投诉处理",
+     "en": "Transport complaint handling",
+     "docs": [
+      "①投诉处理SOP",
+      "②投诉台账",
+      "③投诉调查与处理记录（根因+纠正措施）",
+      "④向客户反馈的记录"
+     ],
+     "owner": "许壮壮",
+     "dept": "质量部",
+     "due": "9月11日前"
+    },
+    {
+     "id": "i307",
+     "title": "· 审计与自检",
+     "en": "Audits & Self-inspection",
+     "docs": [
+      "①自检SOP",
+      "②自检计划（年度）",
+      "③自检报告（含上次）",
+      "④自检发现项CAPA",
+      "⑤内审员资质证明",
+      "⑥对供应商/分包商审计计划与报告"
+     ],
+     "owner": "马宏宇",
+     "dept": "质量部",
+     "due": "9月12日前"
+    },
+    {
+     "id": "i308",
+     "title": "· 分包商管理",
+     "en": "Subcontractors' management",
+     "docs": [
+      "①供应商清单",
+      "②赛诺菲在用供应商的分包协议/质量协议",
+      "③供应商资质审计与评估记录",
+      "④供应商绩效评估"
+     ],
+     "owner": "臧益岐",
+     "dept": "供应商管理部",
+     "due": "9月13日前"
+    },
+    {
+     "id": "i309",
+     "title": "· 客户相关流程：与物料相关的客户特殊要求的确定与评审；客户沟通；客户投诉",
+     "en": "Customer related process: Determination & Review of customer-specific requirements; Communication; Complaints",
+     "docs": [
+      "①项目操作手册"
+     ],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    }
+   ]
+  },
+  {
+   "id": "c4",
+   "name": "文件审查——车辆",
+   "desc": "",
+   "items": [
+    {
+     "id": "i401",
+     "title": "· 温控图/温度分布验证与确认",
+     "en": "Mapping Validation / Qualification",
+     "docs": [
+      "参考温控车验证部分"
+     ],
+     "owner": "",
+     "dept": "设备工程部",
+     "due": ""
+    },
+    {
+     "id": "i402",
+     "title": "· 维护/更新计划",
+     "en": "Maintenance / renewal program",
+     "docs": [
+      "赛诺菲使用车辆的维护保养记录"
+     ],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i403",
+     "title": "· 校准",
+     "en": "Calibration",
+     "docs": [
+      "①校准管理SOP",
+      "②年度校准计划（线下台账）",
+      "③校准证书（温度记录仪、探头、温湿度计）"
+     ],
+     "owner": "牛晨涛",
+     "dept": "设备工程部",
+     "due": "9月11日前"
+    }
+   ]
+  },
+  {
+   "id": "c5",
+   "name": "文件审查——运营",
+   "desc": "",
+   "items": [
+    {
+     "id": "i501",
+     "title": "· 运输计划（含控制点）",
+     "en": "Transport plan (including control points)",
+     "docs": [
+      "1-1、整车：可能需要现场演示调度系统、对应的记录（订单-派车演示）——责任人：赵宽宽",
+      "1-2、零担：可能需要现场演示调度系统、对应的记录（零担演示）——责任人：李超阳",
+      "2、包含控制点的系统验证报告——责任人：莫虎"
+     ],
+     "owner": "赵宽宽、李超阳、莫虎",
+     "dept": "运输部",
+     "due": "9月11日前"
+    },
+    {
+     "id": "i502",
+     "title": "· 装卸货报告",
+     "en": "Loading and unloading report",
+     "docs": [
+      "待确定"
+     ],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i503",
+     "title": "· 车辆及文件的追踪与追溯（如信息系统和备份）",
+     "en": "Tracking and tracing of vehicles and documentation (e.g. IS and back-up)",
+     "docs": [
+      "①数据备份记录演示——责任人：莫虎"
+     ],
+     "owner": "莫虎",
+     "dept": "信息部（IT）",
+     "due": "9月11日演示"
+    },
+    {
+     "id": "i504",
+     "title": "· 交付文件",
+     "en": "Delivery documentation",
+     "docs": [
+      "参考系统检查节点部分"
+     ],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i505",
+     "title": "· 退货流程",
+     "en": "Return process",
+     "docs": [
+      "①退货SOP"
+     ],
+     "owner": "苏兰花",
+     "dept": "运营部",
+     "due": ""
+    },
+    {
+     "id": "i506",
+     "title": "· 蓄冷包/冰排管理",
+     "en": "Management of cool pack",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i507",
+     "title": "· 设备（如发电机）及其维护与校准",
+     "en": "Equipment (e.g. generator) and their maintenance & calibration",
+     "docs": [
+      "参考安全审计清单"
+     ],
+     "owner": "",
+     "dept": "安监部",
+     "due": ""
+    }
+   ]
+  },
+  {
+   "id": "c6",
+   "name": "文件审查——计算机化系统",
+   "desc": "",
+   "items": [
+    {
+     "id": "i601",
+     "title": "· GxP计算机化系统清单、系统描述、验证、备份、恢复计划",
+     "en": "Inventory list of GxP computerized systems, System Description, validation, backup, recovery plan",
+     "docs": [
+      "1、①各系统权限清单（安智、易流、鼎为（深圳疫苗使用）、多协、国尚信）；②验证文件（URS、IQ/OQ/PQ、验证报告）；③权限管理记录；④审计追踪说明；⑤备份——责任人：莫虎",
+      "2、多协、鼎为的验证报告——责任人：马宏宇",
+      "3-1、华北区检查国尚信报警是否已经处理——责任人：王会伟",
+      "3-2、华东区检查国尚信报警是否已经处理——责任人：阮海贝",
+      "3-3、华南区检查国尚信报警是否已经处理——责任人：范键楠"
+     ],
+     "owner": "莫虎、马宏宇、王会伟、阮海贝、范键楠",
+     "dept": "信息部（IT）",
+     "due": "9月11日前"
+    },
+    {
+     "id": "i602",
+     "title": "· 业务连续性计划：运营管理",
+     "en": "Business continuity plan: Operation management",
+     "docs": [
+      "收集各区域应急演练报告"
+     ],
+     "owner": "许壮壮",
+     "dept": "质量部",
+     "due": "9月11日前"
+    },
+    {
+     "id": "i603",
+     "title": "· 其他",
+     "en": "Others",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    }
+   ]
+  },
+  {
+   "id": "c7",
+   "name": "会议收尾（16:30-17:30）",
+   "desc": "",
+   "items": [
+    {
+     "id": "i701",
+     "title": "审计员准备时间",
+     "en": "Preparation time for auditors",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i702",
+     "title": "末次会议（总结会议）",
+     "en": "Closing meeting",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    }
+   ]
+  },
+  {
+   "id": "c8",
+   "name": "附件——需提供文件清单",
+   "desc": "按类别提交的文件清单（中英文对照保留原文）",
+   "items": [
+    {
+     "id": "i801",
+     "title": "[法规 Regulations] Site Master File——文件清单",
+     "en": "Site Master File",
+     "docs": [],
+     "owner": "马宏宇",
+     "dept": "质量部",
+     "due": ""
+    },
+    {
+     "id": "i802",
+     "title": "[产品与工艺] 近两年内生产的全部批次清单（至少两年；可根据供应商情况考虑更长时间范围）",
+     "en": "List of all batches produced in the last two years (at a minimum, more time frame can be considered depending on the supplier)",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i803",
+     "title": "[产品与工艺] 近两年内返工和再加工批次清单（至少两年）",
+     "en": "List of batches reprocessed and reworked in the last two years (at a minimum)",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i804",
+     "title": "[产品与工艺] 工艺流程图——项目操作手册",
+     "en": "Process flow diagrams",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i805",
+     "title": "[场所/厂房 Premises] 生产区域示意图，包括分区、人流和物流——参照安全",
+     "en": "Schematic drawings of production areas, including zoning, personnel and material flows",
+     "docs": [],
+     "owner": "阮海贝、王会伟",
+     "dept": "仓储部",
+     "due": ""
+    },
+    {
+     "id": "i806",
+     "title": "[变更控制 Change control] 自上次审计以来发生的重大变更清单（设施、生产工艺、清洁工艺、分析方法、计算机化系统等）",
+     "en": "List of major changes in activities (facilities, manufacturing process, cleaning process, analytical methods, computerized systems, etc.) since last audit",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i807",
+     "title": "[偏差/OOS] 近两年内偏差清单（含微小偏差）（至少两年；可根据供应商情况考虑更长时间范围）",
+     "en": "List of deviations (including minor deviations) from the last two years (at a minimum, more time frame can be considered depending on the supplier)",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i808",
+     "title": "[偏差/OOS] 近两年内OOS（超标结果）清单（至少两年；可根据供应商情况考虑更长时间范围）",
+     "en": "List of OOS from the last two years (at a minimum, more time frame can be considered depending on the supplier)",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i809",
+     "title": "[投诉/退货/召回] 近两年内投诉清单（至少两年；可根据供应商情况考虑更长时间范围）",
+     "en": "List of Complaints from the last two years (at a minimum, more time frame can be considered depending on the supplier)",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i810",
+     "title": "[投诉/退货/召回] 近两年内召回清单（至少两年；可根据供应商情况考虑更长时间范围）",
+     "en": "List of recalls for the last two years (at a minimum, more time frame can be considered depending on the supplier)",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    },
+    {
+     "id": "i811",
+     "title": "[投诉/退货/召回] 近两年内退货清单（至少两年；可根据供应商情况考虑更长时间范围）",
+     "en": "List of returns for the last two years (at a minimum, more time frame can be considered depending on the supplier)",
+     "docs": [],
+     "owner": "",
+     "dept": "",
+     "due": ""
+    }
+   ]
+  }
+ ]
+};
 
 /* ===== 协同同步配置（GitHub 仓库共享库） ===== */
 const SYNC_TOKEN = 'github_pat_11CNHIMFI0PveoHme2N03X_PCHpRnGXThr5EoPRtn'+'7KTiSdKdih3RSxp2AbnHEkWA7HRSGACZNzA17pReP';
