@@ -131,6 +131,7 @@ input[type=checkbox]:disabled{cursor:not-allowed}
 .doc-count{margin-left:27px;margin-top:8px;font-size:12px;color:var(--sub)}
 /* notes */
 .note-zone{margin:6px 0 0 27px}
+.note-zone:empty{display:none}
 .note-view{background:var(--note-bg);color:var(--note-ink);font-size:12.5px;border-radius:8px;padding:6px 11px;cursor:pointer;overflow-wrap:anywhere;white-space:pre-wrap}
 .note-view::before{content:"备注：";font-weight:600}
 .note-view .who{color:#7E8CA6;font-size:11px;margin-left:8px;white-space:nowrap}
@@ -1579,7 +1580,7 @@ function itemHTML(it, subFilter){
       '<span class="doc-text">'+esc(d)+(w?' <span class="byline" title="由 '+esc(w)+' 于 '+fmtT(cc.at)+' 勾选">'+(ed?'':'🔒 ')+esc(w)+'</span>':'')+'</span>'+
       '<button class="chip chip-sub'+(so?' filled':'')+(sed?'':' locked')+'" data-edit="sowner" data-sub="'+nk+'" title="'+sHint+'" aria-label="子项责任人">'+(so?('👤 '+esc(so)):'+ 责任人')+'</button>'+
       '<button class="icon-btn'+(hasNote?' has-note':'')+'" data-notebtn="'+nk+'" title="备注" aria-label="备注">📝</button>'+
-      (hasNote? noteZoneHTML(nk):'')+
+      noteZoneHTML(nk)+
     '</li>';
   }).join('');
   const lockOwner=!canEditOwner(it.id);
@@ -1597,7 +1598,7 @@ function itemHTML(it, subFilter){
       '<div class="chips">'+chips+'</div>'+
       '<button class="icon-btn'+(hasNote?' has-note':'')+'" data-notebtn="'+it.id+'" title="备注" aria-label="备注">📝</button>'+
     '</div>'+
-    (hasNote? noteZoneHTML(it.id):'')+
+    noteZoneHTML(it.id)+
     (it.docs.length?((docs?('<ul class="docs">'+docs+'</ul>'):'')+'<div class="doc-count" data-count="'+it.id+'">资料子项 '+subDone(it)+'/'+it.docs.length+' 已核对</div>'):'')+
   '</article>';
 }
